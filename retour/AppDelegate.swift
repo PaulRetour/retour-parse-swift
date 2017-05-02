@@ -1,46 +1,74 @@
 //
 //  AppDelegate.swift
-//  retour
+//  Retour
 //
-//  Created by Paul Lancashire on 02/05/2017.
-//  Copyright © 2017 toucan. All rights reserved.
+//  Paul Lancashire
 //
 
 import UIKit
+import CoreData
+import GoogleMaps
+import GooglePlaces
+import Parse
+import ParseFacebookUtilsV4
+import FBSDKCoreKit
+import FBSDKLoginKit
+import CoreLocation
+
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
-
+class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate {
+    
     var window: UIWindow?
-
-
+    
+    let locManager = CLLocationManager()
+    var retourLocationManager = CLLocationManager()
+    let nc = NotificationCenter.default
+    let prefs = UserDefaults.standard
+    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        prefs.setValue("Any", forKey: "status")
+        
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = "sdiond49ncnc20xnwu3"
+            $0.server = "http://retourapp.ddns.net:1337/parse"
+            
+        }
+        Parse.initialize(with: configuration)
         // Override point for customization after application launch.
+        
+        locManager.delegate = self
+        locManager.requestAlwaysAuthorization()
+        locManager.startUpdatingLocation()
+        retourLocationManager.delegate = self
+        retourLocationManager.requestAlwaysAuthorization()
+        retourLocationManager.startUpdatingLocation()
+        
+        GMSPlacesClient.provideAPIKey("AIzaSyC9--UMJpT046hj-geZFDzP1RXBCpbJhVU")
+        GMSServices.provideAPIKey("AIzaSyC9--UMJpT046hj-geZFDzP1RXBCpbJhVU")
+        
+        let defaultACL = PFACL()
+        PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
+        
+        PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
+        
         return true
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        print("user authorization state change")
     }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
     }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //  print("updated location below")
+        //  print(locations)
     }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-
+    
 }
-

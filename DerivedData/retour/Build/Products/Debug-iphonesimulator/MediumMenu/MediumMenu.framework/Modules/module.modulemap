@@ -1,0 +1,10 @@
+framework module MediumMenu {
+  umbrella header "MediumMenu-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module MediumMenu.Swift {
+    header "MediumMenu-Swift.h"
+}
