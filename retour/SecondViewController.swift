@@ -9,15 +9,39 @@
 
 import UIKit
 import GoogleMaps
+import Presentr
 
 
 class SecondViewController: UIViewController {
-
-    @IBOutlet weak var mapView: UIView!
     
+    let presenter = Presentr(presentationType: .bottomHalf)
+    
+    var prefsPresentr = Presentr(presentationType: .fullScreen)
+    
+    var prefsVC = UIViewController()
+    
+    @IBOutlet weak var mapView: GMSMapView!
+    
+    @IBAction func prefsButton(_ sender: Any) {
+        
+        customPresentViewController(prefsPresentr, viewController:
+            prefsVC, animated: true) { 
+                
+        }
+
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+       // prefsPresentr.presentationType = .fullScreen
+        prefsPresentr.transitionType = .coverHorizontalFromRight
+
+        prefsVC = (self.storyboard?.instantiateViewController(withIdentifier: "PrefsViewController"))!
+        presenter.backgroundOpacity = 0.8
+        
+        mapView.backgroundColor = UIColor.white
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,6 +52,12 @@ class SecondViewController: UIViewController {
     @IBAction func unwindCancelFromPrefs(sender: UIStoryboardSegue) {
         print("unwind")
     }
+    
+    
+    @IBAction func unwindSaveFromPrefs(sender: UIStoryboardSegue) {
+        print("unwind and save")
+    }
+
 
 }
 

@@ -33,6 +33,7 @@
 		7A166B711EB8BF910089D4A2 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A166B651EB8BF910089D4A2 /* Security.framework */; };
 		7A166B721EB8BF910089D4A2 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A166B661EB8BF910089D4A2 /* Social.framework */; };
 		7A166B731EB8BF910089D4A2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A166B671EB8BF910089D4A2 /* SystemConfiguration.framework */; };
+		7A16978C1EB8FD25001CAA69 /* 1FZ_KrabiAreaBeach.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A16978B1EB8FD25001CAA69 /* 1FZ_KrabiAreaBeach.jpg */; };
 		7A9EBB291EB872E9005DEA7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB281EB872E9005DEA7E /* AppDelegate.swift */; };
 		7A9EBB2B1EB872E9005DEA7E /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB2A1EB872E9005DEA7E /* FirstViewController.swift */; };
 		7A9EBB2D1EB872E9005DEA7E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB2C1EB872E9005DEA7E /* SecondViewController.swift */; };
@@ -43,6 +44,10 @@
 		7A9EBB4B1EB872E9005DEA7E /* retourUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB4A1EB872E9005DEA7E /* retourUITests.swift */; };
 		7A9EBB591EB87495005DEA7E /* PrefsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB581EB87495005DEA7E /* PrefsViewController.swift */; };
 		7A9EBB5B1EB87621005DEA7E /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB5A1EB87621005DEA7E /* ListViewController.swift */; };
+		7AA860DE1EC066C800B8B007 /* Presentr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA860DD1EC066C800B8B007 /* Presentr.framework */; };
+		7AA860E01EC06E6C00B8B007 /* NewPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA860DF1EC06E6C00B8B007 /* NewPostController.swift */; };
+		7AA860E21EC089E400B8B007 /* NewPostSelectPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA860E11EC089E400B8B007 /* NewPostSelectPopUp.swift */; };
+		7AD5B8081EC50C5F0013E4D7 /* FullPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AD5B8071EC50C5F0013E4D7 /* FullPostController.swift */; };
 		DC6AF6B1A15373B0A0C4E25E /* Pods_retour.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E69BDAC271A1512151694417 /* Pods_retour.framework */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +96,8 @@
 		7A166B651EB8BF910089D4A2 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		7A166B661EB8BF910089D4A2 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		7A166B671EB8BF910089D4A2 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		7A16978B1EB8FD25001CAA69 /* 1FZ_KrabiAreaBeach.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1FZ_KrabiAreaBeach.jpg; sourceTree = "<group>"; };
+		7A502BCF1EB8D1AA00309A34 /* Jelly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Jelly.framework; path = "DerivedData/retour/Build/Products/Debug-iphonesimulator/Jelly/Jelly.framework"; sourceTree = "<group>"; };
 		7A9EBB251EB872E9005DEA7E /* retour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = retour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9EBB281EB872E9005DEA7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A9EBB2A1EB872E9005DEA7E /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -107,6 +114,10 @@
 		7A9EBB4C1EB872E9005DEA7E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7A9EBB581EB87495005DEA7E /* PrefsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrefsViewController.swift; sourceTree = "<group>"; };
 		7A9EBB5A1EB87621005DEA7E /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		7AA860DD1EC066C800B8B007 /* Presentr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Presentr.framework; path = "DerivedData/retour/Build/Products/Debug-iphonesimulator/Presentr/Presentr.framework"; sourceTree = "<group>"; };
+		7AA860DF1EC06E6C00B8B007 /* NewPostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostController.swift; sourceTree = "<group>"; };
+		7AA860E11EC089E400B8B007 /* NewPostSelectPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostSelectPopUp.swift; sourceTree = "<group>"; };
+		7AD5B8071EC50C5F0013E4D7 /* FullPostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FullPostController.swift; path = ../FullPostController.swift; sourceTree = "<group>"; };
 		CF58F0DDC46C2FAA71770CB4 /* Pods-retour.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-retour.debug.xcconfig"; path = "Pods/Target Support Files/Pods-retour/Pods-retour.debug.xcconfig"; sourceTree = "<group>"; };
 		E69BDAC271A1512151694417 /* Pods_retour.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_retour.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -116,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7AA860DE1EC066C800B8B007 /* Presentr.framework in Frameworks */,
 				7A166B681EB8BF910089D4A2 /* AVKit.framework in Frameworks */,
 				7A166B691EB8BF910089D4A2 /* CFNetwork.framework in Frameworks */,
 				7A166B6A1EB8BF910089D4A2 /* CoreData.framework in Frameworks */,
@@ -165,6 +177,8 @@
 		66BF3A2245B6E2EC058F383D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7AA860DD1EC066C800B8B007 /* Presentr.framework */,
+				7A502BCF1EB8D1AA00309A34 /* Jelly.framework */,
 				7A166B5C1EB8BF910089D4A2 /* AVKit.framework */,
 				7A166B5D1EB8BF910089D4A2 /* CFNetwork.framework */,
 				7A166B5E1EB8BF910089D4A2 /* CoreData.framework */,
@@ -220,10 +234,14 @@
 		7A9EBB271EB872E9005DEA7E /* retour */ = {
 			isa = PBXGroup;
 			children = (
+				7AD5B8071EC50C5F0013E4D7 /* FullPostController.swift */,
+				7A16978B1EB8FD25001CAA69 /* 1FZ_KrabiAreaBeach.jpg */,
 				7A9EBB281EB872E9005DEA7E /* AppDelegate.swift */,
 				7A9EBB2A1EB872E9005DEA7E /* FirstViewController.swift */,
 				7A9EBB2C1EB872E9005DEA7E /* SecondViewController.swift */,
 				7A9EBB2E1EB872E9005DEA7E /* Main.storyboard */,
+				7AA860E11EC089E400B8B007 /* NewPostSelectPopUp.swift */,
+				7AA860DF1EC06E6C00B8B007 /* NewPostController.swift */,
 				7A067ABC1EB8B85A00DFBE56 /* RegisterLoginViewController.swift */,
 				7A9EBB5A1EB87621005DEA7E /* ListViewController.swift */,
 				7A9EBB581EB87495005DEA7E /* PrefsViewController.swift */,
@@ -376,6 +394,7 @@
 			files = (
 				7A9EBB351EB872E9005DEA7E /* LaunchScreen.storyboard in Resources */,
 				7A9EBB321EB872E9005DEA7E /* Assets.xcassets in Resources */,
+				7A16978C1EB8FD25001CAA69 /* 1FZ_KrabiAreaBeach.jpg in Resources */,
 				7A9EBB301EB872E9005DEA7E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -450,11 +469,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A9EBB2D1EB872E9005DEA7E /* SecondViewController.swift in Sources */,
+				7AD5B8081EC50C5F0013E4D7 /* FullPostController.swift in Sources */,
 				7A067ABD1EB8B85A00DFBE56 /* RegisterLoginViewController.swift in Sources */,
 				7A9EBB291EB872E9005DEA7E /* AppDelegate.swift in Sources */,
 				7A9EBB2B1EB872E9005DEA7E /* FirstViewController.swift in Sources */,
 				7A9EBB5B1EB87621005DEA7E /* ListViewController.swift in Sources */,
+				7AA860E01EC06E6C00B8B007 /* NewPostController.swift in Sources */,
 				7A9EBB591EB87495005DEA7E /* PrefsViewController.swift in Sources */,
+				7AA860E21EC089E400B8B007 /* NewPostSelectPopUp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -623,6 +645,8 @@
 					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/ParseFacebookUtilsV4",
 					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/ReachabilitySwift",
 					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/SwiftyJSON",
+					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/Jelly",
+					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/Presentr",
 				);
 				INFOPLIST_FILE = retour/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -653,6 +677,8 @@
 					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/ParseFacebookUtilsV4",
 					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/ReachabilitySwift",
 					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/SwiftyJSON",
+					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/Jelly",
+					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/Presentr",
 				);
 				INFOPLIST_FILE = retour/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
