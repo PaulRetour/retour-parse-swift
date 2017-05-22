@@ -14,10 +14,9 @@ import Presentr
 import ReachabilitySwift
 import Parse
 
-class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate, UISearchBarDelegate, GMSAutocompleteViewControllerDelegate, GMSAutocompleteResultsViewControllerDelegate {
+class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate, UISearchBarDelegate, GMSAutocompleteResultsViewControllerDelegate, UISearchControllerDelegate {
     
-    let retourGreen = UIColor(red:0.58, green:0.83, blue:0.76, alpha:1.0)
-    
+    let retourGreen = UIColor(red:0.58, green:0.82, blue:0.76, alpha:1.0)    
     let appD = UIApplication.shared.delegate as! AppDelegate
     var reach = Reachability()!
     var locManager = CLLocationManager()
@@ -28,19 +27,50 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     var zoomLevel: Float = 15.0
     
     let presenter = Presentr(presentationType: .bottomHalf)
+    let presentOfflineError = Presentr(presentationType: .alert)
+    
+    var alert1VC = UIViewController()
+
     var popUpVC = NewPostSelectPopUp()
     
-    var mainNav = UINavigationBar(frame: CGRect(x: 0, y: 0, width: 440, height: 44))
-  //  var mySearchBar = UISearchBar(frame:  CGRect(x: 10, y: 0, width: (UIScreen.main.bounds.width - 10), height: 44))
+//    var mainNav = UINavigationBar(frame: CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: UIScreen.main.bounds.width, height: 44))
+     var mainNav = UINavigationBar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 64))
     
-    var searchButton = UIButton(type: UIButtonType.system)
-    var cancelButton = UIButton(type: UIButtonType.system)
     
     var resultsViewController: GMSAutocompleteResultsViewController?
     var searchController: UISearchController?
-    var resultView: UITextView?
+    var resultView: UITextView? 
+    
+    var place1Image: UIImage!
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
+    override func viewDidLoad() {
+        
+        super.viewDidLoad()
+        self.view.addSubview(mainNav)
+        resultsViewController = GMSAutocompleteResultsViewController()
+        resultsViewController?.delegate = self
 
-    var objectToSave: PFObject?
+        searchController = UISearchController(searchResultsController: resultsViewController)
+        searchController?.searchResultsUpdater = resultsViewController
+        searchController?.searchBar.showsCancelButton = true
+        searchController?.searchBar.delegate = self
+        searchController?.searchBar.tintColor = UIColor.white
+        searchController?.hidesNavigationBarDuringPresentation = false
+        searchController?.searchBar.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: UIScreen.main.bounds.width, height: 44)
+        mainNav.backgroundColor = retourGreen
+        mainNav.addSubview((searchController?.searchBar)!)
+        
+        locManager.delegate = appD
+        newPostMap.delegate = self
+        placesClient = GMSPlacesClient.shared()
+        
+        addNavBar()
+        
+    }
     
     func cancel() {
         print("cancel")
@@ -48,88 +78,68 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     }
     
     func displaySearchBar() {
+
         print("searchbar here")
-        resultsViewController = GMSAutocompleteResultsViewController()
-        resultsViewController?.delegate = self
-        
-        searchController = UISearchController(searchResultsController: resultsViewController)
-        searchController?.searchResultsUpdater = resultsViewController
-        
-        // Put the search bar in the navigation bar.
-        searchController?.searchBar.sizeToFit()
-        self.mainNav.addSubview((searchController?.searchBar)!
-        )
-     //   navigationItem.titleView = searchController?.searchBar
-        
-        // When UISearchController presents the results view, present it in
-        // this view controller, not one further up the chain.
-        definesPresentationContext = true
-        
-        // Prevent the navigation bar from being hidden when searching.
-        searchController?.hidesNavigationBarDuringPresentation = false
+
     }
     
     func removeNavBar() {
-        self.mainNav.removeFromSuperview()
+       // self.mainNav.isHidden = true
     }
     
     func addNavBar() {
-        print("adding nav bar")
-        self.view.addSubview(mainNav)
-        mainNav.backgroundColor = retourGreen
-        searchButton.frame = CGRect(x: (UIScreen.main.bounds.width - 70), y: 5, width: 60, height: 40)
-        cancelButton.frame = CGRect(x: 5, y: 5, width: 60, height: 40)
-        searchButton.tintColor = UIColor.white
-        cancelButton.tintColor = UIColor.white
-        searchButton.setTitle("Search", for: UIControlState.normal)
-        cancelButton.setTitle("Cancel", for: UIControlState.normal)
-        searchButton.addTarget(self, action: #selector(displaySearchBar), for: UIControlEvents.touchUpInside)
-        cancelButton.addTarget(self, action: #selector(cancel), for: UIControlEvents.touchUpInside)
-        self.mainNav.addSubview(searchButton)
-        self.mainNav.addSubview(cancelButton)
-       
+      //  self.mainNav.isHidden = false
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addNavBar()
-        locManager.delegate = appD
-        newPostMap.delegate = self
-        placesClient = GMSPlacesClient.shared()
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         if reach.isReachable {
             getMyLocation()
         } else {
             print("offline - need to add a pop up here or bar text")
+            presentNetworkAlertPopUp()
         }
     }
     
-    override var prefersStatusBarHidden: Bool {
-        return true
+    func presentNetworkAlertPopUp() {
+        alert1VC = self.storyboard?.instantiateViewController(withIdentifier: "alert1VC") as! Alert1ViewController
+        presentOfflineError.dismissOnTap = true
+        self.customPresentViewController(presentOfflineError, viewController: alert1VC, animated: true) {
+            print("alert presented")
+            print(self.alert1VC.view.frame)
+            print(self.alert1VC.view.subviews)
+            print(self.alert1VC.view.backgroundColor)
+        }
     }
+    
+//    override var prefersStatusBarHidden: Bool {
+//        return true
+//    }
     
     // Custom Functions - portable
     
     
     // Takes the location ID retrieves again and adds text to popup view
     func presentPopUpView(placeID: String) {
-
+      //  mainNav.isHidden = true
         print("presentpopupview")
         var placeName1: String!
         var placeAddress: String!
+        var placeCoord: CLLocationCoordinate2D!
+
         placesClient = GMSPlacesClient.shared()
         placesClient.lookUpPlaceID(placeID, callback: { (place, error) in
             print("place name = \(place?.name)")
             print("placeID = \(place?.placeID)")
             placeName1 = place?.name
             placeAddress = place?.formattedAddress
+            placeCoord = place?.coordinate
         })
         placesClient.lookUpPhotos(forPlaceID: placeID) { (photoMetaList, error) in
             if error == nil {
                 let firstPhotoData = photoMetaList?.results.first
-                se
+                if firstPhotoData != nil {
+               self.loadImageFromMetaData(photoMeta: firstPhotoData!)
+                }
             }
         }
         presenter.blurBackground = false
@@ -142,16 +152,23 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
             print("place name = \(placeName1)")
             self.popUpVC.placeName = placeName1
             self.popUpVC.placeAddress = placeAddress
+            self.popUpVC.placeID = placeID
+            self.popUpVC.placeCoord = placeCoord
         }
         
     }
     
-    func loadImageFromMetaData(photoMeta: GMSPlacePhotoMetadata) {
-        placesClient.loadPlacePhoto(photoMeta) { (image, error) in
-            if error == nil {
-                
-            }
-        }
+    func loadImageFromMetaData(photoMeta: GMSPlacePhotoMetadata){
+        var outputImage = UIImage()
+        self.placesClient.loadPlacePhoto(photoMeta, callback: { (image, error) in
+                if error == nil {
+                    outputImage = image!
+                    print("output image ok")
+                    self.popUpVC.image1View.image = image!
+                } else {
+                    print("issue with output image")
+                    outputImage = UIImage(named: "retourlogo")! }
+             })
     }
     
     // Takes location, checks for network, returns the location camera
@@ -206,12 +223,6 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
         self.moveCameraToMarker(coordinates: currentLoc, placeID: place)
         
     }
-
-    func prepareObjectForSegue(location: CLLocationCoordinate2D, placeID: String, coord: CLLocationCoordinate2D) {
-        objectToSave?.add(placeID, forKey: "GMSPlaceID")
-        objectToSave?.add(coord, forKey: "GMSPlaceGeo")
-        performSegue(withIdentifier: "goToMedisAddSegue", sender: self)
-    }
     
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         print("marker")
@@ -237,7 +248,6 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         self.popUpVC.dismiss(animated: true, completion: nil)
         print("being dismissed")
-        addNavBar()
     }
     
     func presentrShouldDismiss(keyboardShowing: Bool) -> Bool {
@@ -251,26 +261,34 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         print("text")
-        let autocompleteController = GMSAutocompleteViewController()
-        autocompleteController.delegate = self as! GMSAutocompleteViewControllerDelegate
-        autocompleteController.tintColor = retourGreen
-        present(autocompleteController, animated: true) { 
-            
-        }
+
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-      //  self.mainNav.removeFromSuperview()
-      //  addNavBar()
+        print("search bar cancel clicked")
+
+        self.performSegue(withIdentifier: "cancelFromNewPostWithSender", sender: self)
     }
     
     // Handle the user's selection.
-    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-        print("Place name: \(place.name)")
-        print("Place address: \(place.formattedAddress)")
-        print("Place attributions: \(place.attributions)")
-        
-    }
+//    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
+//        print("results2")
+//        print("Place name: \(place.name)")
+//        print("Place address: \(place.formattedAddress)")
+//        print("Place attributions: \(place.attributions)")
+//        searchController?.isActive = false
+//        searchController?.dismiss(animated: true) {
+//            self.placesClient.lookUpPlaceID(place.placeID, callback: { (place, error) in
+//                if error == nil {
+//                    self.addCurrentLocationMarker(currentLoc: (place?.coordinate)!, place: (place?.placeID)!)
+//                    
+//                }
+//                
+//            })
+//            
+//        }
+//        
+//    }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         // TODO: handle the error.
@@ -279,27 +297,33 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     
     // User canceled the operation.
     func wasCancelled(_ viewController: GMSAutocompleteViewController) {
-        dismiss(animated: true, completion: nil)
+        resultsViewController?.dismiss(animated: true) {
+            print("was cancelled")
+        }
     }
     
     // Turn the network activity indicator on and off again.
     func didRequestAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        print("request predictions")
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
     }
     
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
+        print("updating")
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
-        searchController?.isActive = false
+        searchController?.isActive = true
+        print("results1")
         // Do something with the selected place.
         print("Place name: \(place.name)")
         print("Place address: \(place.formattedAddress)")
         print("Place attributions: \(place.attributions)")
         print("place id \(place.placeID)")
         resultsController.dismiss(animated: true) {
+            print("looking up place id")
             self.placesClient.lookUpPlaceID(place.placeID, callback: { (place, error) in
                 if error == nil {
                 self.addCurrentLocationMarker(currentLoc: (place?.coordinate)!, place: (place?.placeID)!)
@@ -317,6 +341,10 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
         print("Error: ", error.localizedDescription)
     }
     
+    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
+        print("end editing")
+        return true
+    }
 }
 
 

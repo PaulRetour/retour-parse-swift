@@ -11,6 +11,7 @@ import UIKit
 class PrefsViewControoler: UIViewController, UISearchBarDelegate {
     
     
+    
     @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {

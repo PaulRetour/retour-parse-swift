@@ -16,6 +16,8 @@ import GooglePlaces
 class FirstViewController: UIViewController {
 
     @IBOutlet weak var navigationBar: UINavigationBar!
+    
+    let retourGrey = UIColor(colorLiteralRed: 0.79, green: 0.79, blue: 0.78, alpha: 1.0)
 
     @IBOutlet weak var baxkgroundImage: UIImageView!
     @IBAction func cancelFromNewPost(sender: UIStoryboardSegue) {
