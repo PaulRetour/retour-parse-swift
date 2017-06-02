@@ -36,6 +36,12 @@ class FirstViewController: UIViewController {
         }
     }
     
+    var nearPosts = [PFObject]() {
+        didSet {
+            print("didset")
+        }
+    }
+    
     // makes sure some view load stuff only runs once //
     var loadedAlready: Bool = false
     
@@ -85,6 +91,7 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
 
         super.viewDidLoad()
+        getAllMyPosts()
 
     }
 
@@ -133,5 +140,19 @@ class FirstViewController: UIViewController {
         }
     }
 
+    // test function to get all posts not by me!
+    func getAllMyPosts() {
+        var query = PFQuery(className: "blogs")
+        query.includeKey("userPoint")
+        query.addDescendingOrder("createdAt")
+        query.whereKey("userPoint", notEqualTo: PFUser.current())
+        query.findObjectsInBackground { (object, error) in
+            if error == nil {
+              print("data")
+                print(object)
+                self.nearPosts = object!
+            }
+        }
+    }
 }
 

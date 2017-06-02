@@ -49,6 +49,17 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     
     override func viewDidLoad() {
         
+        do {
+            // Set the map style by passing the URL of the local file.
+            if let styleURL = Bundle.main.url(forResource: "RetourMapStyle", withExtension: "json") {
+                newPostMap.mapStyle = try GMSMapStyle(contentsOfFileURL: styleURL)
+            } else {
+                NSLog("Unable to find style.json")
+            }
+        } catch {
+            NSLog("One or more of the map styles failed to load. \(error)")
+        }
+        
         super.viewDidLoad()
         self.view.addSubview(mainNav)
         resultsViewController = GMSAutocompleteResultsViewController()
@@ -248,6 +259,7 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         self.popUpVC.dismiss(animated: true, completion: nil)
         print("being dismissed")
+        self.view.reloadInputViews()
     }
     
     func presentrShouldDismiss(keyboardShowing: Bool) -> Bool {
@@ -269,26 +281,6 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
 
         self.performSegue(withIdentifier: "cancelFromNewPostWithSender", sender: self)
     }
-    
-    // Handle the user's selection.
-//    func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
-//        print("results2")
-//        print("Place name: \(place.name)")
-//        print("Place address: \(place.formattedAddress)")
-//        print("Place attributions: \(place.attributions)")
-//        searchController?.isActive = false
-//        searchController?.dismiss(animated: true) {
-//            self.placesClient.lookUpPlaceID(place.placeID, callback: { (place, error) in
-//                if error == nil {
-//                    self.addCurrentLocationMarker(currentLoc: (place?.coordinate)!, place: (place?.placeID)!)
-//                    
-//                }
-//                
-//            })
-//            
-//        }
-//        
-//    }
     
     func viewController(_ viewController: GMSAutocompleteViewController, didFailAutocompleteWithError error: Error) {
         // TODO: handle the error.

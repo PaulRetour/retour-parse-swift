@@ -168,6 +168,13 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     func saveData() {
         
+        let acl = PFACL()
+        acl.getPublicReadAccess = true
+        acl.setWriteAccess(true, for: PFUser.current()!)
+        objectToSave.acl = acl
+        objectToSave.setValue(PFUser.current(), forKey: "userPoint")
+       // objectToSave.setValue(self.typesdict, forKey: "types_array")
+        
         alertPopUp = storyboard?.instantiateViewController(withIdentifier: "alert1VC") as! Alert1ViewController
         print("existing data - \(objectToSave)")
         print("object to save")
@@ -175,20 +182,40 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         if titleText.text != nil || titleText.text != "Title" { objectToSave.setValue(titleText.text, forKey: "title") }
         if bodyText.text != nil { objectToSave.setValue(bodyText.text, forKey: "body") }
         if tagsText.text != nil { objectToSave.setValue(tagsText.text, forKey: "tags") }
+
         if imagesArray.count > 0 { for i in imagesArray {
+            
             // set each image to data
             // then save to image[indexPath]file //
+            
+            // returns image as data representation and prepares pffile
+            let newImageData = UIImageJPEGRepresentation(i, 0.25)
+            let imageDataUpload = PFFile(data: newImageData!)
+            
+            objectToSave.setValue(imageDataUpload, forKey: "image\(imagesArray.count)file")
+            
+            imageDataUpload?.saveInBackground(block: { (complete, err) in
+                if err == nil {
+                    print("complete")
+                } else { print("handle image error here") }
+            })
             }} else { print("no images") }
 
-        objectToSave.saveInBackground { (success, error) in
+       // objectToSave.saveInBackground { (success, error) in
+            objectToSave.saveEventually { (success, error) in
+
             if (success) {
                 print("object saved")
+                self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: { 
+                    
+                })
             } else { print(error?.localizedDescription)
                 let presentAlert = Presentr(presentationType: .alert)
                 self.customPresentViewController(presentAlert, viewController: self.alertPopUp, animated: true, completion: {
                     
                 })
                 print("not saved")
+                print(error)
         }
         }
 
@@ -196,6 +223,13 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("pressed image number \(indexPath)")
+    }
+    
+    func imageToData(image: UIImage) -> NSData {
+        
+        let outputData = NSData()
+        
+        return outputData
     }
     
 }

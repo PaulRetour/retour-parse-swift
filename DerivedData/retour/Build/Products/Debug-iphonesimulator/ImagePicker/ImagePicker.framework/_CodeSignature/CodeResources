@@ -18,7 +18,7 @@
 		</data>
 		<key>ImagePicker.bundle/Info.plist</key>
 		<data>
-		AN4u5Ne7ibL5FBnyf+f28nD+Mxw=
+		RqsgQ4jjW6pG4GUpXqXYoDPej/4=
 		</data>
 		<key>ImagePicker.bundle/OFF@3x.png</key>
 		<data>
@@ -30,7 +30,7 @@
 		</data>
 		<key>ImagePicker.bundle/_CodeSignature/CodeDirectory</key>
 		<data>
-		oDsR0a+AQiuzWSx/Fs7+yxDlfAk=
+		EnXzZY0oq0br4GDNkHu9FCCVzMQ=
 		</data>
 		<key>ImagePicker.bundle/_CodeSignature/CodeRequirements</key>
 		<data>
@@ -38,7 +38,7 @@
 		</data>
 		<key>ImagePicker.bundle/_CodeSignature/CodeRequirements-1</key>
 		<data>
-		IDJ7RWoq88au3zRy4roZC+gQopY=
+		3ki1fsGxYebEVEd/14yB3h+qSIY=
 		</data>
 		<key>ImagePicker.bundle/_CodeSignature/CodeResources</key>
 		<data>
@@ -62,7 +62,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		xhrWoVyTpG0+LhCPbJ4+Yao9Znw=
+		vqUEL0FLYwi9to2vIjKTTzzlEBs=
 		</data>
 		<key>Modules/ImagePicker.swiftmodule/x86_64.swiftdoc</key>
 		<data>
@@ -116,11 +116,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			AN4u5Ne7ibL5FBnyf+f28nD+Mxw=
+			RqsgQ4jjW6pG4GUpXqXYoDPej/4=
 			</data>
 			<key>hash2</key>
 			<data>
-			foFEWNYy0BUa96gIuXU+aPZrqo0m9pzUHyDnhWCQNYE=
+			KDIz+yhEgE2AXggQAdN+JdRJPZvsuEHMfKq9xo1Ss70=
 			</data>
 		</dict>
 		<key>ImagePicker.bundle/OFF@3x.png</key>
@@ -149,11 +149,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			oDsR0a+AQiuzWSx/Fs7+yxDlfAk=
+			EnXzZY0oq0br4GDNkHu9FCCVzMQ=
 			</data>
 			<key>hash2</key>
 			<data>
-			p7E2r6daS42V0L2YfnnUw+Y4xb7bSPGTolds7LQmBlU=
+			9Lm3Kwo+ym71S722xG3gLH8bz5bVmG8rxnIvqGIz6JI=
 			</data>
 		</dict>
 		<key>ImagePicker.bundle/_CodeSignature/CodeRequirements</key>
@@ -171,11 +171,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			IDJ7RWoq88au3zRy4roZC+gQopY=
+			3ki1fsGxYebEVEd/14yB3h+qSIY=
 			</data>
 			<key>hash2</key>
 			<data>
-			R9/AtcfpvU25V0fIsVuYjv7PRsCKqg/jMAXpPpKBB/A=
+			hLOWw7isKbAsBRiCryvNzI3pimmTHCpsmV4rezfbDiM=
 			</data>
 		</dict>
 		<key>ImagePicker.bundle/_CodeSignature/CodeResources</key>
