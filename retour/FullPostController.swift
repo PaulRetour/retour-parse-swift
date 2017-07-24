@@ -17,6 +17,8 @@ import Presentr
 class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDelegate, ImagePickerDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     
     var alertPopUp = UIViewController()
+    
+    var savingPopUp = UIViewController()
 
     @IBOutlet weak var saveButton: UIBarButtonItem!
     
@@ -32,7 +34,17 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     
     var imagesArray = [UIImage]()
     
-    var objectToSave: PFObject!
+    var objectToSave: PFObject! {
+        didSet {
+            print("updated object - \(objectToSave)")
+        }
+    }
+    
+    var placeToSave: PFObject! {
+        didSet {
+            print("updated place - \(placeToSave)")
+        }
+    }
     
     @IBOutlet weak var imagesCollectionView: UICollectionView!
 
@@ -66,6 +78,11 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     @IBOutlet weak var tagBar: UIView!
     @IBOutlet weak var photosBar: UIView!
     
+    
+    @IBAction func storeButton(_ sender: Any) {
+        pinData()
+    }
+    
     @IBAction func photosButton(_ sender: Any) {
         
     present(imagePickerController, animated: true, completion: nil)
@@ -79,6 +96,9 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
     }
         
     override func viewDidLoad() {
+        
+        print("incoming object - \(objectToSave)")
+        print("incoming place - \(placeToSave)")
         
         self.hideKeyboardWhenTappedAround()
         KeyboardAvoiding.avoidingView = self.titleText
@@ -112,15 +132,11 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         view.backgroundColor = UIColor.white.withAlphaComponent(0.9)
         titleText.backgroundColor = UIColor.white
         
-
-        
         self.imagesCollectionView!.register(UINib(nibName: "NewPostImagesXib", bundle: nil), forCellWithReuseIdentifier: "imageCell")
-
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -166,8 +182,109 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         return cell
     }
     
+    func pinData() {
+        
+        var imageNumberSaved = 0
+        let acl = PFACL()
+        acl.getPublicReadAccess = true
+        acl.setWriteAccess(true, for: PFUser.current()!)
+        objectToSave.acl = acl
+        objectToSave.setValue(PFUser.current(), forKey: "userPoint")
+        // objectToSave.setValue(self.typesdict, forKey: "types_array")
+        
+        alertPopUp = storyboard?.instantiateViewController(withIdentifier: "alert1VC") as! Alert1ViewController
+        savingPopUp = storyboard?.instantiateViewController(withIdentifier: "savingVC") as! SavingViewController
+        
+        let present = Presentr(presentationType: .alert)
+        self.customPresentViewController(present, viewController: savingPopUp, animated: true) {
+            
+        }
+        
+        print("existing data - \(objectToSave)")
+        print("object to save")
+        if titleText.text != nil || titleText.text != "Title" { objectToSave.setValue(titleText.text, forKey: "title") }
+        if bodyText.text != nil { objectToSave.setValue(bodyText.text, forKey: "body") }
+        if tagsText.text != nil { objectToSave.setValue(tagsText.text, forKey: "tags") }
+        
+        if imagesArray.count > 0 {
+            
+            for i in imagesArray {
+                
+                // set each image to data
+                // then save to image[indexPath]file //
+                
+                // returns image as data representation and prepares pffile
+                let newImageData = UIImageJPEGRepresentation(i, 0.25) as! Data
+                let imageDataUpload = PFFile(data: newImageData)
+                
+                let id = imagesArray.index(of: i) as! Int
+                
+                objectToSave.setValue(imageDataUpload, forKey: "image\(id)file")
+                
+                imageDataUpload?.saveInBackground(block: { (complete, err) in
+                    if err == nil {
+                        print("complete")
+                        imageNumberSaved = imageNumberSaved + 1
+                        print("image number saved = \(imageNumberSaved)")
+                        if imageNumberSaved == self.imagesArray.count {
+                            print("about to save.... object = \(self.objectToSave)")
+                            self.objectToSave.saveInBackground(block: { (done, err) in
+                                print("finally saved all images")
+                                self.savingPopUp.dismiss(animated: true, completion: {
+                                    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
+                                        print("current vc = \(self.nibName)")
+                                    })
+                                })
+                                // check here for existing place - if not, add this new one //
+                                var placeQuery = PFQuery(className: "places")
+                                placeQuery.whereKey("GMSPlaceID", contains: self.placeToSave.value(forKey: "GMSPlaceID") as! String)
+                                placeQuery.findObjectsInBackground(block: { (object, err) in
+                                    if err == nil {
+                                        print("no error")
+                                        if object?.count == 0 {
+                                            print("no existing object")
+                                            self.placeToSave.saveEventually()
+                                        }
+                                    } else { print("error finding place") }
+                                })
+                                
+                            })
+                        }
+                    } else { print("handle image error here") }
+                })
+            }
+            
+        } else { print("no images")
+            
+
+            objectToSave.pinInBackground(block: { (success, error) in
+                
+            //objectToSave.saveInBackground { (success, error) in
+                // objectToSave.saveEventually { (success, error) in
+                
+                if (success) {
+                    print("object saved")
+                    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: {
+                        
+                    })
+                } else { print(error?.localizedDescription)
+                    let presentAlert = Presentr(presentationType: .alert)
+                    self.customPresentViewController(presentAlert, viewController: self.alertPopUp, animated: true, completion: {
+                        
+                    })
+                    print("not saved")
+                    print(error)
+                }
+            })
+            
+        }
+        
+        
+    }
+    
     func saveData() {
         
+        var imageNumberSaved = 0
         let acl = PFACL()
         acl.getPublicReadAccess = true
         acl.setWriteAccess(true, for: PFUser.current()!)
@@ -176,48 +293,90 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
        // objectToSave.setValue(self.typesdict, forKey: "types_array")
         
         alertPopUp = storyboard?.instantiateViewController(withIdentifier: "alert1VC") as! Alert1ViewController
+        savingPopUp = storyboard?.instantiateViewController(withIdentifier: "savingVC") as! SavingViewController
+        
+        let present = Presentr(presentationType: .alert)
+        self.customPresentViewController(present, viewController: savingPopUp, animated: true) { 
+            
+        }
+        
         print("existing data - \(objectToSave)")
         print("object to save")
-        print(objectToSave)
         if titleText.text != nil || titleText.text != "Title" { objectToSave.setValue(titleText.text, forKey: "title") }
         if bodyText.text != nil { objectToSave.setValue(bodyText.text, forKey: "body") }
         if tagsText.text != nil { objectToSave.setValue(tagsText.text, forKey: "tags") }
 
-        if imagesArray.count > 0 { for i in imagesArray {
+        if imagesArray.count > 0 {
+            
+            for i in imagesArray {
             
             // set each image to data
             // then save to image[indexPath]file //
             
             // returns image as data representation and prepares pffile
-            let newImageData = UIImageJPEGRepresentation(i, 0.25)
-            let imageDataUpload = PFFile(data: newImageData!)
+            let newImageData = UIImageJPEGRepresentation(i, 0.25) as! Data
+            let imageDataUpload = PFFile(data: newImageData)
             
-            objectToSave.setValue(imageDataUpload, forKey: "image\(imagesArray.count)file")
+            let id = imagesArray.index(of: i) as! Int
+                
+            objectToSave.setValue(imageDataUpload, forKey: "image\(id)file")
             
             imageDataUpload?.saveInBackground(block: { (complete, err) in
                 if err == nil {
                     print("complete")
+                    imageNumberSaved = imageNumberSaved + 1
+                    print("image number saved = \(imageNumberSaved)")
+                    if imageNumberSaved == self.imagesArray.count {
+                        print("about to save.... object = \(self.objectToSave)")
+                        self.objectToSave.saveInBackground(block: { (done, err) in
+                            print("finally saved all images")
+                            self.savingPopUp.dismiss(animated: true, completion: {
+                                self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
+                                   print("current vc = \(self.nibName)")
+                                })
+                            })
+                            // check here for existing place - if not, add this new one //
+                            var placeQuery = PFQuery(className: "places")
+                            placeQuery.whereKey("GMSPlaceID", contains: self.placeToSave.value(forKey: "GMSPlaceID") as! String)
+                            placeQuery.findObjectsInBackground(block: { (object, err) in
+                                if err == nil {
+                                    print("no error")
+                                    if object?.count == 0 {
+                                        print("no existing object")
+                                        self.placeToSave.saveEventually()
+                                    }
+                                } else { print("error finding place") }
+                            })
+                
+                        })
+                    }
                 } else { print("handle image error here") }
             })
-            }} else { print("no images") }
-
-       // objectToSave.saveInBackground { (success, error) in
-            objectToSave.saveEventually { (success, error) in
-
-            if (success) {
-                print("object saved")
-                self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: { 
-                    
-                })
-            } else { print(error?.localizedDescription)
-                let presentAlert = Presentr(presentationType: .alert)
-                self.customPresentViewController(presentAlert, viewController: self.alertPopUp, animated: true, completion: {
-                    
-                })
-                print("not saved")
-                print(error)
+            }
+            
+        } else { print("no images")
+            
+            objectToSave.saveInBackground { (success, error) in
+                // objectToSave.saveEventually { (success, error) in
+                
+                if (success) {
+                    print("object saved")
+                    self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: {
+                        
+                    })
+                } else { print(error?.localizedDescription)
+                    let presentAlert = Presentr(presentationType: .alert)
+                    self.customPresentViewController(presentAlert, viewController: self.alertPopUp, animated: true, completion: {
+                        
+                    })
+                    print("not saved")
+                    print(error)
+                }
+            }
+        
         }
-        }
+
+
 
     }
     

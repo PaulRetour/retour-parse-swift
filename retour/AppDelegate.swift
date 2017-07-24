@@ -25,16 +25,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
     var retourLocationManager = CLLocationManager()
     let nc = NotificationCenter.default
     let prefs = UserDefaults.standard
+    var loc = CLLocation()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         prefs.setValue("Any", forKey: "status")
         
+//        let configuration = ParseClientConfiguration {
+//            $0.applicationId = "dev"
+//            $0.server = "http://localhost:1337/parse"
+//            
+//        }
+        
         let configuration = ParseClientConfiguration {
-            $0.applicationId = "sdiond49ncnc20xnwu3"
-            $0.server = "http://retourapp.ddns.net:1337/parse"
+            $0.applicationId = "019f49dce17c38276fjdt"
+            $0.server = "https://festive-quanta-621.appspot.com/parse"
             
         }
+        
         Parse.initialize(with: configuration)
         // Override point for customization after application launch.
         
@@ -45,6 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         retourLocationManager.requestAlwaysAuthorization()
         retourLocationManager.startUpdatingLocation()
         
+        
         GMSPlacesClient.provideAPIKey("AIzaSyC9--UMJpT046hj-geZFDzP1RXBCpbJhVU")
         GMSServices.provideAPIKey("AIzaSyC9--UMJpT046hj-geZFDzP1RXBCpbJhVU")
         
@@ -52,6 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         PFACL.setDefault(defaultACL, withAccessForCurrentUser: true)
         
         PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
+        
+      //  PFUser.enableAutomaticUser()
         
         return true
     }

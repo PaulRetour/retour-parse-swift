@@ -16,15 +16,20 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
     
     let standardsInfo = standards()
     
+    var userToSave = PFUser()
+    
+    @IBAction func cancelButton(_ sender: Any) {
+        self.dismiss(animated: true) { 
+            
+        }
+    }
     @IBOutlet weak var spinner: InstagramActivityIndicator!
     
     var reach = Reachability()!
     
     @IBOutlet weak var emailField: JVFloatLabeledTextField!
     
-    @IBOutlet weak var passwordField: JVFloatLabeledTextField!
-    
-    @IBOutlet weak var label: UILabel!
+  //  @IBOutlet weak var label: UILabel!
     
     var emailAddress = String()
     
@@ -37,23 +42,18 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
       //  alertlabel.isEnabled = false
         alertlabel.isHidden = true
         
-        passwordField.delegate = self
         emailField.delegate = self
         
         emailField.textColor = standardsInfo.retourGreen
         emailField.placeholderColor = standardsInfo.retourGreen
         emailField.spellCheckingType = UITextSpellCheckingType.no
         
-        passwordField.textColor = standardsInfo.retourGreen
-        passwordField.placeholderColor = standardsInfo.retourGreen
-        passwordField.spellCheckingType = UITextSpellCheckingType.no
-        
-        label.textColor = standardsInfo.retourGrey
+     //   label.textColor = standardsInfo.retourGrey
         alertlabel.textColor = standardsInfo.retourGrey
         
         spinner.strokeColor = standardsInfo.retourGreen
         spinner.isHidden = true
-        spinner.lineWidth = 2
+        spinner.lineWidth = 3
     }
     
     func checkUsername() {
@@ -81,6 +81,7 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
                         self.spinner.isHidden = true
                         self.alertlabel.text = "No user with that email, carry on"
                         self.alertlabel.isHidden = false
+                        // send email here... //
                         self.performSegue(withIdentifier: "Registration2Segue", sender: self)
                     } else {
                         print("user already exists")
@@ -105,14 +106,18 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let dst = segue.destination as! Registration2ViewController
+        userToSave.email = emailField.text
+        userToSave.username = emailField.text
+        print("dst = \(self.userToSave)")
+        dst.userToSave = self.userToSave
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
-        if textField == passwordField {
-            print("return key hit on password field- check and segue here")
-            checkUsername()
-        }
         if textField == emailField {
-            self.passwordField.becomeFirstResponder()
+            checkUsername()
         }
         return true
         }

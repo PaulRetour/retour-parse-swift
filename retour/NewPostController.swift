@@ -16,6 +16,8 @@ import Parse
 
 class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate, UISearchBarDelegate, GMSAutocompleteResultsViewControllerDelegate, UISearchControllerDelegate {
     
+    @IBOutlet var activityIndicator: InstagramActivityIndicator!
+    
     let retourGreen = UIColor(red:0.58, green:0.82, blue:0.76, alpha:1.0)    
     let appD = UIApplication.shared.delegate as! AppDelegate
     var reach = Reachability()!
@@ -49,6 +51,12 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     
     override func viewDidLoad() {
         
+        activityIndicator.isHidden = true
+        activityIndicator.startAnimating()
+        activityIndicator.lineWidth = 2
+        activityIndicator.strokeColor = UIColor.white
+
+        
         do {
             // Set the map style by passing the URL of the local file.
             if let styleURL = Bundle.main.url(forResource: "RetourMapStyle", withExtension: "json") {
@@ -64,22 +72,25 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
         self.view.addSubview(mainNav)
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
+      //  resultsViewController?.view.frame = (CGRect.(x: 0, y: 30, width: UIScreen.main.bounds.width, height: 400)\
+        resultsViewController?.view.frame = CGRect(x: 0, y: 30, width: UIScreen.main.bounds.width, height: 400)
 
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
         searchController?.searchBar.showsCancelButton = true
         searchController?.searchBar.delegate = self
-        searchController?.searchBar.tintColor = UIColor.white
+        searchController?.dimsBackgroundDuringPresentation = false
         searchController?.hidesNavigationBarDuringPresentation = false
         searchController?.searchBar.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: UIScreen.main.bounds.width, height: 44)
         mainNav.backgroundColor = retourGreen
         mainNav.addSubview((searchController?.searchBar)!)
         
+        
         locManager.delegate = appD
         newPostMap.delegate = self
         placesClient = GMSPlacesClient.shared()
         
-        addNavBar()
+        //addNavBar()
         
     }
     
@@ -136,6 +147,7 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
         var placeName1: String!
         var placeAddress: String!
         var placeCoord: CLLocationCoordinate2D!
+        var placeTypes = [String]()
 
         placesClient = GMSPlacesClient.shared()
         placesClient.lookUpPlaceID(placeID, callback: { (place, error) in
@@ -144,6 +156,7 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
             placeName1 = place?.name
             placeAddress = place?.formattedAddress
             placeCoord = place?.coordinate
+            placeTypes = (place?.types)!
         })
         placesClient.lookUpPhotos(forPlaceID: placeID) { (photoMetaList, error) in
             if error == nil {
@@ -165,6 +178,7 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
             self.popUpVC.placeAddress = placeAddress
             self.popUpVC.placeID = placeID
             self.popUpVC.placeCoord = placeCoord
+            self.popUpVC.placeTypes = placeTypes
         }
         
     }
@@ -203,9 +217,12 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     locManager.distanceFilter = 50
     var myLocation = appD.retourLocationManager.location
         print("myLocation = \(myLocation)")
+        
+        self.activityIndicator.isHidden = false
 
         placesClient.currentPlace { (likelihoodlist, erro) in
             if erro == nil {
+                self.activityIndicator.isHidden = true
                 let like = likelihoodlist?.likelihoods[0]
                 var loc2d = myLocation?.coordinate
                 let place = like?.place
@@ -215,7 +232,9 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
                 self.addCurrentLocationMarker(currentLoc: (place?.coordinate)!, place: (place?.placeID)!)
                 self.presentPopUpView(placeID: place!.placeID)
 
-            } else { print("error") }
+            } else {
+                self.activityIndicator.isHidden = true
+                print("error") }
         }
     }
     
@@ -268,7 +287,7 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        
+        print(searchBar.text)
     }
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {

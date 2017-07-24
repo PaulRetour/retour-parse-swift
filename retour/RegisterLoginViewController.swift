@@ -55,7 +55,8 @@ class RegisterLoginViewController: UIViewController {
     func fbGraphRequestAll() {
         
         var parseDateStyle = DateFormatter()
-        parseDateStyle.dateFormat = "dd/MM/yyyy"
+        parseDateStyle.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ss.SSS'Z'"
+        
         var imageURL : String!
         
         print("FB Login - Requesting User Data")
@@ -70,15 +71,28 @@ class RegisterLoginViewController: UIViewController {
                 imageURL = fbPictureData.value(forKey: "url") as! String
                 let userName: String = result.value(forKey: "name") as! String
                 let birthday: String = result.value(forKey: "birthday") as! String
+                
+                let fbDateFormat = DateFormatter()
+                fbDateFormat.dateFormat = "dd/MM/yyyy"
+                let fbToDate: Date = fbDateFormat.date(from: birthday)!
+                let outputDateString: String = parseDateStyle.string(from: fbToDate)
+                print("date string to save = \(outputDateString)")
+                print("date = \(fbToDate)")
+                
                 let email: String = result.value(forKey: "email") as! String
-                print("username = \(userName)")
-                print("birthday = \(birthday)")
-                let outputDate = parseDateStyle.date(from: birthday)
-                PFUser.current()!.setValue(userName, forKey: "username")
-                PFUser.current()!.setValue(outputDate, forKey: "birthday")
+                let status: String = result.value(forKey: "relationship_status") as! String
+                PFUser.current()!.setValue(userName, forKey: "username2")
+                PFUser.current()!.setValue(outputDateString, forKey: "birthday")
+                PFUser.current()?.setValue(fbToDate, forKey: "birthDate")
+               // PFUser.current()?.setValue(fbToDate, forKey: "birthDate")
                 PFUser.current()!.setValue(email, forKey: "email")
-                PFUser.current()?.saveEventually()
-                print("saving facebook info")
+                PFUser.current()?.setValue(email, forKey: "username")
+                PFUser.current()?.setValue(status, forKey: "status")
+            //    PFUser.current()?.saveEventually()
+                PFUser.current()?.saveInBackground(block: { (complete, error) in
+                    print("done saving")
+                })
+             //   print("saving facebook info")
                 
                 //  once complete above, get image
                 

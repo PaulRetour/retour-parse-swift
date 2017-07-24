@@ -16,10 +16,12 @@ import Parse
 class NewPostSelectPopUp: UIViewController  {
     
     var objectToSave = PFObject(className: "blogs")
+    var placeToSave = PFObject(className: "places")
     let nextVCpresentr = Presentr(presentationType: .fullScreen)
     var fullPostVC = FullPostController()
     var placeID: String!
     var placeCoord: CLLocationCoordinate2D!
+    var placeTypes = [String]()
 
     var placeName: String! {
         didSet {
@@ -87,13 +89,26 @@ class NewPostSelectPopUp: UIViewController  {
         nextVCpresentr.transitionType = TransitionType.coverHorizontalFromRight
         customPresentViewController(nextVCpresentr, viewController: fullPostVC, animated: true) { 
             print("presented")
-            self.objectToSave.add(placeID, forKey: "GMSPlaceID")
-            self.objectToSave.add(location, forKey: "GMSPlaceGeo")
+            
+            self.placeToSave.setValue(placeID, forKey: "GMSPlaceID")
+            self.objectToSave.setValue(self.placeName, forKey: "GMSPlaceQuickName")
+            self.objectToSave.setValue(self.placeTypes, forKey: "types")
+            self.placeToSave.setValue(PFUser.current(), forKey: "createdBy")
+
+            
+            //self.objectToSave.add(placeID , forKey: "GMSPlaceID")
+            self.objectToSave.setValue(placeID, forKey: "GMSPlaceID")
+            print("gmsplaceid = \(placeID)")
+            var pfgeo = PFGeoPoint(latitude: location.latitude, longitude: location.longitude)
+            self.objectToSave["GMSPlaceGeo"] = pfgeo
+            self.placeToSave.setValue(pfgeo, forKey: "geoLocation")
             print("placename = \(self.placeName)")
             print("placeaddress = \(self.placeAddress)")
             self.fullPostVC.placeNameLabel.text = self.placeName
             self.fullPostVC.placeAddressLabel.text = self.placeAddress
             self.fullPostVC.objectToSave = self.objectToSave
+            self.fullPostVC.placeToSave = self.placeToSave
+            
         }
     }
 
