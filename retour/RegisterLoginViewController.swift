@@ -89,8 +89,14 @@ class RegisterLoginViewController: UIViewController {
                 PFUser.current()?.setValue(email, forKey: "username")
                 PFUser.current()?.setValue(status, forKey: "status")
             //    PFUser.current()?.saveEventually()
+                print("facebookusertosave - \(PFUser.current())")
                 PFUser.current()?.saveInBackground(block: { (complete, error) in
+                    if error == nil {
+
                     print("done saving")
+                    } else {
+                        print(error)
+                    }
                 })
              //   print("saving facebook info")
                 

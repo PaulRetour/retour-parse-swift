@@ -16,8 +16,19 @@ import Presentr
 
 class FirstViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
+    var countryCityImageDataArray: [UIImage]!
+    var countryCityTextDataArray: [String]!
+    var countryCityIDDataArray: [String]!
+    
+    // declare individual dictionary type
+    // declares an array of dictionaries - string, any type.
+    // 3 dictonaries per array - image, location, GMSID //
+
+    var ccDict = [Dictionary<String, Any>]()
+    
     let googleSearches = GoogleSearches()
     
+    @IBOutlet var noBlogsLabel: UILabel!
     // Place Views Outlets //
     @IBOutlet var cityLabel: UILabel!
     @IBOutlet var countryLabel: UILabel!
@@ -132,7 +143,7 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
         }
 
     }
-    
+
     
     var locationCoord = CLLocation() {
         didSet {
@@ -188,11 +199,13 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     override func viewDidLoad() {
         
+        noBlogsLabel.isHidden = true
+        
         firstCollectionView.delegate = self
         firstCollectionView.dataSource = self
         
-        cityImage.layer.cornerRadius = (cityImage.bounds.height / 2)
-        countryImage.layer.cornerRadius = (countryImage.bounds.height / 2)
+        //cityImage.layer.cornerRadius = (cityImage.bounds.height / 2)
+       // countryImage.layer.cornerRadius = (countryImage.bounds.height / 2)
         cityImage.clipsToBounds = true
         countryImage.clipsToBounds = true
         
@@ -300,11 +313,13 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     func getPostsNearby() {
+        noBlogsLabel.isHidden = true
         print("getPostsNearby")
         var query = PFQuery(className: "blogs")
         query.includeKey("userPoint")
         query.addDescendingOrder("createdAt")
-        query.whereKey("image0file", notEqualTo: "")
+     //   query.whereKey("image0file", notEqualTo: "")
+        query.whereKeyExists("image0file")
         if reach.isReachable {
             returnLocationString()
             let loc = PFGeoPoint(latitude: locationCoord.coordinate.latitude, longitude: locationCoord.coordinate.longitude)
@@ -312,10 +327,19 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
            // query.whereKey("image0file", notEqualTo: "")
             query.findObjectsInBackground(block: { (objects, error) in
                 if error == nil {
+                    if objects!.count > 0 {
+    
                 // update cllocation view here //
                 print(objects)
                 self.firstCVObjects = objects!
                 self.firstCollectionView.reloadData()
+                    } else {
+                        print("no blogs to display")
+                        self.noBlogsLabel.isHidden = false
+                    }
+                    
+                } else {
+                    print("error")
                 }
             })
         }
@@ -332,6 +356,13 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
                     if error == nil {
                         if let firstCityPhoto = cityImageCallback?.results.first {
                             self.loadCityImageForMetadata(photoMetadata: firstCityPhoto)
+                            var indDict : NSMutableDictionary = [String : Any]() as! NSMutableDictionary
+                            indDict = ["Image" : firstCityPhoto, "PlaceName" : cityPlaceResponse?.name, "PlaceID" : cityIDString]
+                            
+                            print("inddict = \(indDict)")
+                            self.ccDict.append(indDict as! Dictionary<String, Any>)
+                            print("ccdict = \(self.ccDict)")
+                            print("ccdict count = \(self.ccDict.count)")
                         }
                     }
                 })
@@ -381,10 +412,9 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+        if collectionView == firstCollectionView {
         let cellData = firstCVObjects[indexPath.row] as! PFObject
         
-
- 
        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MainHomeCollectionViewCell", for: indexPath) as! MainHomeCollectionViewCell
         
         cellData.fetchIfNeededInBackground { (response, error) in
@@ -404,7 +434,12 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
                     cell.mainImage.image = finalImage
                 }
             })
-                   return cell
+            return cell
+        } else {
+            let cell = UICollectionViewCell()
+            return cell
+        }
+
         }
     
     
@@ -423,6 +458,20 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
         customPresentViewController(blogPresentr, viewController: blogView, animated: true) {
             print("presented view")
         }
+        
+    }
+    
+    func populateCityCountryArray(image: UIImage, collectionViewID: UICollectionView) {
+        if countryCityImageDataArray.count > 0 {
+            
+            // add the image and reload the collection view
+            countryCityImageDataArray.append(image)
+            collectionViewID.reloadData()
+            
+        }
+    }
+    
+    func updateCollectionView(array: Array<Any>) {
         
     }
 }

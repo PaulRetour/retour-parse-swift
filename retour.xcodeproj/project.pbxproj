@@ -62,7 +62,14 @@
 		7A4B05AA1ED5B95B00C1EA14 /* RetourStandards.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B05A91ED5B95B00C1EA14 /* RetourStandards.swift */; };
 		7A4B05AC1ED5E0E800C1EA14 /* Registration2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B05AB1ED5E0E800C1EA14 /* Registration2ViewController.swift */; };
 		7A4B05AE1ED6DB2800C1EA14 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B05AD1ED6DB2800C1EA14 /* ActivityIndicator.swift */; };
+		7A4B495D1F25ED13008644D6 /* OfflineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A4B495C1F25ED13008644D6 /* OfflineViewController.swift */; };
+		7A4B495F1F261990008644D6 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A4B495E1F261990008644D6 /* libsqlite3.tbd */; };
 		7A4E03341F20E718000D7443 /* travel_stamps_detail.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A4E03331F20E718000D7443 /* travel_stamps_detail.jpg */; };
+		7A5D8CD81F43297F009479ED /* TripsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5D8CD71F43297F009479ED /* TripsViewController.swift */; };
+		7A5D8CDA1F4329C3009479ED /* TripsTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A5D8CD91F4329C3009479ED /* TripsTableCell.xib */; };
+		7A5D8CDC1F432A12009479ED /* TripsTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A5D8CDB1F432A12009479ED /* TripsTableCell.swift */; };
+		7A5D8CDE1F4424D5009479ED /* DGElasticPullToRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5D8CDD1F4424D5009479ED /* DGElasticPullToRefresh.framework */; };
+		7A5D8CE01F4424D9009479ED /* DateTimePicker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A5D8CDF1F4424D9009479ED /* DateTimePicker.framework */; };
 		7A64BD3D1EE7D96A0008461B /* retour-backgroundA.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A64BD3C1EE7D96A0008461B /* retour-backgroundA.png */; };
 		7A64BD3F1EE7D9B60008461B /* ticketlogo72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A64BD3E1EE7D9B60008461B /* ticketlogo72x72.png */; };
 		7A64BD411EE7DCBF0008461B /* 67815_10151592190926565_1154302128_n.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 7A64BD401EE7DCBF0008461B /* 67815_10151592190926565_1154302128_n.jpg */; };
@@ -75,6 +82,7 @@
 		7A7AF5AE1F0155440074FBF4 /* MainHomeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7A7AF5AD1F0155440074FBF4 /* MainHomeCollectionViewCell.xib */; };
 		7A7AF5B01F0155830074FBF4 /* MainHomeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A7AF5AF1F0155830074FBF4 /* MainHomeCollectionViewCell.swift */; };
 		7A86C2B71F12BBDA00F9F565 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86C2B61F12BBDA00F9F565 /* MyViewController.swift */; };
+		7A8C95851F3F530400DA293F /* sliderKnob48.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A8C95841F3F530400DA293F /* sliderKnob48.png */; };
 		7A9CAA521EDEC4B10004C7CA /* RetourMapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A9CAA511EDEC4B10004C7CA /* RetourMapStyle.json */; };
 		7A9EBB291EB872E9005DEA7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB281EB872E9005DEA7E /* AppDelegate.swift */; };
 		7A9EBB2B1EB872E9005DEA7E /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB2A1EB872E9005DEA7E /* FirstViewController.swift */; };
@@ -89,6 +97,9 @@
 		7AA860DE1EC066C800B8B007 /* Presentr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AA860DD1EC066C800B8B007 /* Presentr.framework */; };
 		7AA860E01EC06E6C00B8B007 /* NewPostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA860DF1EC06E6C00B8B007 /* NewPostController.swift */; };
 		7AA860E21EC089E400B8B007 /* NewPostSelectPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AA860E11EC089E400B8B007 /* NewPostSelectPopUp.swift */; };
+		7AACEB641F3EC95300B6F599 /* OfflineTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AACEB631F3EC95300B6F599 /* OfflineTableViewCell.xib */; };
+		7AACEB661F3EC96F00B6F599 /* OfflineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AACEB651F3EC96F00B6F599 /* OfflineTableViewCell.swift */; };
+		7AAE100E1F3E0DA000060C71 /* globeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AAE100D1F3E0DA000060C71 /* globeButton.png */; };
 		7AB1525C1F22480400061F07 /* WSTagsField.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AB1525B1F22480400061F07 /* WSTagsField.framework */; };
 		7AB443C51EE7F523006E3BEB /* Queries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB443C41EE7F523006E3BEB /* Queries.swift */; };
 		7AB443C71EE801B0006E3BEB /* AgeRangeCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AB443C61EE801B0006E3BEB /* AgeRangeCalculator.swift */; };
@@ -105,6 +116,8 @@
 		7AD76EA91F1DD15B00576EF1 /* logoutButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD76EA81F1DD15B00576EF1 /* logoutButton.png */; };
 		7AD76EAB1F1DD38100576EF1 /* newticketlogo44.png in Resources */ = {isa = PBXBuildFile; fileRef = 7AD76EAA1F1DD38100576EF1 /* newticketlogo44.png */; };
 		7AE054841ECC438500C9A638 /* Alert1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE054831ECC438500C9A638 /* Alert1ViewController.swift */; };
+		7AE5CC9E1F44288C009A7C22 /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5CC9D1F44288C009A7C22 /* AddTripViewController.swift */; };
+		7AE5CCA01F4437FA009A7C22 /* FlightPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5CC9F1F4437FA009A7C22 /* FlightPopUpViewController.swift */; };
 		7AF00BE81F161BF300670470 /* MyBlogsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF00BE71F161BF300670470 /* MyBlogsTableViewCell.swift */; };
 		7AF00BEA1F161C1000670470 /* MyBlogsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AF00BE91F161C1000670470 /* MyBlogsTableViewCell.xib */; };
 		7AF00BEC1F165EED00670470 /* BlogPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF00BEB1F165EED00670470 /* BlogPostViewController.swift */; };
@@ -189,8 +202,15 @@
 		7A4B05A91ED5B95B00C1EA14 /* RetourStandards.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RetourStandards.swift; sourceTree = "<group>"; };
 		7A4B05AB1ED5E0E800C1EA14 /* Registration2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Registration2ViewController.swift; sourceTree = "<group>"; };
 		7A4B05AD1ED6DB2800C1EA14 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		7A4B495C1F25ED13008644D6 /* OfflineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineViewController.swift; sourceTree = "<group>"; };
+		7A4B495E1F261990008644D6 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		7A4E03331F20E718000D7443 /* travel_stamps_detail.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = travel_stamps_detail.jpg; sourceTree = "<group>"; };
 		7A502BCF1EB8D1AA00309A34 /* Jelly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Jelly.framework; path = "DerivedData/retour/Build/Products/Debug-iphonesimulator/Jelly/Jelly.framework"; sourceTree = "<group>"; };
+		7A5D8CD71F43297F009479ED /* TripsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripsViewController.swift; sourceTree = "<group>"; };
+		7A5D8CD91F4329C3009479ED /* TripsTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TripsTableCell.xib; sourceTree = "<group>"; };
+		7A5D8CDB1F432A12009479ED /* TripsTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripsTableCell.swift; sourceTree = "<group>"; };
+		7A5D8CDD1F4424D5009479ED /* DGElasticPullToRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DGElasticPullToRefresh.framework; path = "DerivedData/retour/Build/Products/Debug-iphonesimulator/DGElasticPullToRefresh/DGElasticPullToRefresh.framework"; sourceTree = "<group>"; };
+		7A5D8CDF1F4424D9009479ED /* DateTimePicker.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DateTimePicker.framework; path = "DerivedData/retour/Build/Products/Debug-iphonesimulator/DateTimePicker/DateTimePicker.framework"; sourceTree = "<group>"; };
 		7A64BD3C1EE7D96A0008461B /* retour-backgroundA.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "retour-backgroundA.png"; sourceTree = "<group>"; };
 		7A64BD3E1EE7D9B60008461B /* ticketlogo72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ticketlogo72x72.png; sourceTree = "<group>"; };
 		7A64BD401EE7DCBF0008461B /* 67815_10151592190926565_1154302128_n.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 67815_10151592190926565_1154302128_n.jpg; sourceTree = "<group>"; };
@@ -203,6 +223,7 @@
 		7A7AF5AD1F0155440074FBF4 /* MainHomeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainHomeCollectionViewCell.xib; sourceTree = "<group>"; };
 		7A7AF5AF1F0155830074FBF4 /* MainHomeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainHomeCollectionViewCell.swift; sourceTree = "<group>"; };
 		7A86C2B61F12BBDA00F9F565 /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
+		7A8C95841F3F530400DA293F /* sliderKnob48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sliderKnob48.png; path = ../../../Design/Projects/Retour/buttons/sliderKnob48.png; sourceTree = "<group>"; };
 		7A9CAA511EDEC4B10004C7CA /* RetourMapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RetourMapStyle.json; sourceTree = "<group>"; };
 		7A9EBB251EB872E9005DEA7E /* retour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = retour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9EBB281EB872E9005DEA7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +244,9 @@
 		7AA860DD1EC066C800B8B007 /* Presentr.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Presentr.framework; path = "DerivedData/retour/Build/Products/Debug-iphonesimulator/Presentr/Presentr.framework"; sourceTree = "<group>"; };
 		7AA860DF1EC06E6C00B8B007 /* NewPostController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostController.swift; sourceTree = "<group>"; };
 		7AA860E11EC089E400B8B007 /* NewPostSelectPopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewPostSelectPopUp.swift; sourceTree = "<group>"; };
+		7AACEB631F3EC95300B6F599 /* OfflineTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OfflineTableViewCell.xib; sourceTree = "<group>"; };
+		7AACEB651F3EC96F00B6F599 /* OfflineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineTableViewCell.swift; sourceTree = "<group>"; };
+		7AAE100D1F3E0DA000060C71 /* globeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = globeButton.png; path = ../../../Design/Projects/Retour/buttons/globeButton.png; sourceTree = "<group>"; };
 		7AB1525B1F22480400061F07 /* WSTagsField.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WSTagsField.framework; path = "DerivedData/retour/Build/Products/Debug-iphonesimulator/WSTagsField/WSTagsField.framework"; sourceTree = "<group>"; };
 		7AB443C41EE7F523006E3BEB /* Queries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Queries.swift; sourceTree = "<group>"; };
 		7AB443C61EE801B0006E3BEB /* AgeRangeCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeRangeCalculator.swift; sourceTree = "<group>"; };
@@ -239,6 +263,8 @@
 		7AD76EA81F1DD15B00576EF1 /* logoutButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logoutButton.png; sourceTree = "<group>"; };
 		7AD76EAA1F1DD38100576EF1 /* newticketlogo44.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = newticketlogo44.png; sourceTree = "<group>"; };
 		7AE054831ECC438500C9A638 /* Alert1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert1ViewController.swift; sourceTree = "<group>"; };
+		7AE5CC9D1F44288C009A7C22 /* AddTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
+		7AE5CC9F1F4437FA009A7C22 /* FlightPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightPopUpViewController.swift; sourceTree = "<group>"; };
 		7AF00BE71F161BF300670470 /* MyBlogsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBlogsTableViewCell.swift; sourceTree = "<group>"; };
 		7AF00BE91F161C1000670470 /* MyBlogsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyBlogsTableViewCell.xib; sourceTree = "<group>"; };
 		7AF00BEB1F165EED00670470 /* BlogPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogPostViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +278,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7A5D8CE01F4424D9009479ED /* DateTimePicker.framework in Frameworks */,
+				7A5D8CDE1F4424D5009479ED /* DGElasticPullToRefresh.framework in Frameworks */,
+				7A4B495F1F261990008644D6 /* libsqlite3.tbd in Frameworks */,
 				7AB1525C1F22480400061F07 /* WSTagsField.framework in Frameworks */,
 				7A06AB8D1ECC7F8000C8AF40 /* EZSwiftExtensions.framework in Frameworks */,
 				7A1C89581ECB1CC300239EC3 /* ImagePicker.framework in Frameworks */,
@@ -303,6 +332,9 @@
 		66BF3A2245B6E2EC058F383D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7A5D8CDF1F4424D9009479ED /* DateTimePicker.framework */,
+				7A5D8CDD1F4424D5009479ED /* DGElasticPullToRefresh.framework */,
+				7A4B495E1F261990008644D6 /* libsqlite3.tbd */,
 				7AB1525B1F22480400061F07 /* WSTagsField.framework */,
 				7A06AB8C1ECC7F8000C8AF40 /* EZSwiftExtensions.framework */,
 				7A1C89571ECB1CC300239EC3 /* ImagePicker.framework */,
@@ -361,6 +393,10 @@
 				7A2BD0241F03F8A600F8CC3A /* ThreeImageTableViewCell.swift */,
 				7AF00BE71F161BF300670470 /* MyBlogsTableViewCell.swift */,
 				7AF00BE91F161C1000670470 /* MyBlogsTableViewCell.xib */,
+				7AACEB631F3EC95300B6F599 /* OfflineTableViewCell.xib */,
+				7AACEB651F3EC96F00B6F599 /* OfflineTableViewCell.swift */,
+				7A5D8CD91F4329C3009479ED /* TripsTableCell.xib */,
+				7A5D8CDB1F432A12009479ED /* TripsTableCell.swift */,
 			);
 			name = "Table Views";
 			sourceTree = "<group>";
@@ -381,9 +417,23 @@
 			name = views;
 			sourceTree = "<group>";
 		};
+		7A5347581F3AE853009791FA /* Login/Registration */ = {
+			isa = PBXGroup;
+			children = (
+				7A0358F51EF19F9E008306FE /* LoginViewController.swift */,
+				7A067ABC1EB8B85A00DFBE56 /* RegisterLoginViewController.swift */,
+				7ACD5F031ED47D0A001FFE38 /* RegistrationViewController.swift */,
+				7A4B05AB1ED5E0E800C1EA14 /* Registration2ViewController.swift */,
+				7ACDB43D1EEE7E020038B607 /* Registration3ViewController.swift */,
+			);
+			name = Login/Registration;
+			sourceTree = "<group>";
+		};
 		7A64BD461EE7DD5E0008461B /* Buttons/Images */ = {
 			isa = PBXGroup;
 			children = (
+				7A8C95841F3F530400DA293F /* sliderKnob48.png */,
+				7AAE100D1F3E0DA000060C71 /* globeButton.png */,
 				7ACE79F71F25C82600E518C0 /* heartnavbarbutton.png */,
 				7AF17D291F25C6ED00A44EF0 /* Heart.png */,
 				7A4A0A691F1E40C500A3AF34 /* googleMapLogo@2x.png */,
@@ -437,28 +487,28 @@
 		7A9EBB271EB872E9005DEA7E /* retour */ = {
 			isa = PBXGroup;
 			children = (
+				7A5347581F3AE853009791FA /* Login/Registration */,
 				7A0E1B041F0EC035007538AE /* Map Icons */,
 				7A3434181ECB2937009512F2 /* views */,
 				7A64BD461EE7DD5E0008461B /* Buttons/Images */,
 				7A9EBB281EB872E9005DEA7E /* AppDelegate.swift */,
 				7A9EBB2A1EB872E9005DEA7E /* FirstViewController.swift */,
-				7A0E1B021F0E278A007538AE /* MapIconSelector.swift */,
 				7A9EBB2C1EB872E9005DEA7E /* SecondViewController.swift */,
+				7AE5CC9F1F4437FA009A7C22 /* FlightPopUpViewController.swift */,
 				7A9EBB5A1EB87621005DEA7E /* ListViewController.swift */,
+				7A0E1B021F0E278A007538AE /* MapIconSelector.swift */,
 				7AB5CFC91EFA4E28002354AB /* PlaceViewPopUpController.swift */,
 				7AB443C41EE7F523006E3BEB /* Queries.swift */,
 				7A664AF71F23486D00586758 /* GoogleSearches.swift */,
 				7A9EBB2E1EB872E9005DEA7E /* Main.storyboard */,
+				7AE5CC9D1F44288C009A7C22 /* AddTripViewController.swift */,
+				7A5D8CD71F43297F009479ED /* TripsViewController.swift */,
+				7A4B495C1F25ED13008644D6 /* OfflineViewController.swift */,
 				7AF00BEB1F165EED00670470 /* BlogPostViewController.swift */,
 				7ABE68481F1525AD0020ADBF /* MyBlogListViewController.swift */,
 				7ABE68461F14D9760020ADBF /* FavouritesViewController.swift */,
 				7A86C2B61F12BBDA00F9F565 /* MyViewController.swift */,
 				7A49C4E41F13C39500A9E911 /* MyMenuVC.swift */,
-				7A0358F51EF19F9E008306FE /* LoginViewController.swift */,
-				7A067ABC1EB8B85A00DFBE56 /* RegisterLoginViewController.swift */,
-				7ACD5F031ED47D0A001FFE38 /* RegistrationViewController.swift */,
-				7A4B05AB1ED5E0E800C1EA14 /* Registration2ViewController.swift */,
-				7ACDB43D1EEE7E020038B607 /* Registration3ViewController.swift */,
 				7AE054831ECC438500C9A638 /* Alert1ViewController.swift */,
 				7AA860E11EC089E400B8B007 /* NewPostSelectPopUp.swift */,
 				7AA860DF1EC06E6C00B8B007 /* NewPostController.swift */,
@@ -628,6 +678,7 @@
 				7A9EBB351EB872E9005DEA7E /* LaunchScreen.storyboard in Resources */,
 				7AD76EAB1F1DD38100576EF1 /* newticketlogo44.png in Resources */,
 				7A2BD0141F03B74D00F8CC3A /* MapInfoWindow.xib in Resources */,
+				7A8C95851F3F530400DA293F /* sliderKnob48.png in Resources */,
 				7A64BD3D1EE7D96A0008461B /* retour-backgroundA.png in Resources */,
 				7A2BD0181F03C97200F8CC3A /* googleMapLogo.png in Resources */,
 				7A9EBB321EB872E9005DEA7E /* Assets.xcassets in Resources */,
@@ -638,17 +689,20 @@
 				7A0E1B071F0EC04C007538AE /* HotelMapIcon.png in Resources */,
 				7A0AB0B21EFBF6DA00A90FE9 /* ticketlogo152_newgreen.png in Resources */,
 				7A64BD411EE7DCBF0008461B /* 67815_10151592190926565_1154302128_n.jpg in Resources */,
+				7A5D8CDA1F4329C3009479ED /* TripsTableCell.xib in Resources */,
 				7A2BD01F1F03F6D100F8CC3A /* TwoImageTableViewCell.xib in Resources */,
 				7A0AB0B41EFC096C00A90FE9 /* UserButton.png in Resources */,
 				7AF00BEA1F161C1000670470 /* MyBlogsTableViewCell.xib in Resources */,
 				7A7AF5AE1F0155440074FBF4 /* MainHomeCollectionViewCell.xib in Resources */,
 				7A2BD0231F03F7F800F8CC3A /* ThreeImageTableViewCell.xib in Resources */,
 				7A64BD451EE7DD570008461B /* loginButton.png in Resources */,
+				7AACEB641F3EC95300B6F599 /* OfflineTableViewCell.xib in Resources */,
 				7A0E1B081F0EC04C007538AE /* TransportMapIcon32.png in Resources */,
 				7A4A0A6A1F1E40C500A3AF34 /* googleMapLogo@2x.png in Resources */,
 				7A16978C1EB8FD25001CAA69 /* 1FZ_KrabiAreaBeach.jpg in Resources */,
 				7A9EBB301EB872E9005DEA7E /* Main.storyboard in Resources */,
 				7A4E03341F20E718000D7443 /* travel_stamps_detail.jpg in Resources */,
+				7AAE100E1F3E0DA000060C71 /* globeButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,6 +778,7 @@
 				7A0358F61EF19F9E008306FE /* LoginViewController.swift in Sources */,
 				7A06B6461EF3FD9A00DDA329 /* SavingViewController.swift in Sources */,
 				7A4B05A81ED5A1EF00C1EA14 /* MyProfileViewController.swift in Sources */,
+				7AACEB661F3EC96F00B6F599 /* OfflineTableViewCell.swift in Sources */,
 				7ABE68471F14D9760020ADBF /* FavouritesViewController.swift in Sources */,
 				7A9EBB2D1EB872E9005DEA7E /* SecondViewController.swift in Sources */,
 				7A2BD0161F03B81F00F8CC3A /* MapInfoWindow.swift in Sources */,
@@ -742,19 +797,24 @@
 				7AB443C51EE7F523006E3BEB /* Queries.swift in Sources */,
 				7A4B05AC1ED5E0E800C1EA14 /* Registration2ViewController.swift in Sources */,
 				7AD0C1371F1A24C800B51B61 /* FacebookData.swift in Sources */,
+				7A5D8CD81F43297F009479ED /* TripsViewController.swift in Sources */,
 				7A9EBB5B1EB87621005DEA7E /* ListViewController.swift in Sources */,
 				7AB443C71EE801B0006E3BEB /* AgeRangeCalculator.swift in Sources */,
 				7AA860E01EC06E6C00B8B007 /* NewPostController.swift in Sources */,
 				7A86C2B71F12BBDA00F9F565 /* MyViewController.swift in Sources */,
 				7A9EBB591EB87495005DEA7E /* PrefsViewController.swift in Sources */,
 				7ABE68491F1525AD0020ADBF /* MyBlogListViewController.swift in Sources */,
+				7A4B495D1F25ED13008644D6 /* OfflineViewController.swift in Sources */,
 				7A4B05AE1ED6DB2800C1EA14 /* ActivityIndicator.swift in Sources */,
 				7A2BD0211F03F73300F8CC3A /* TwoImageTableViewCell.swift in Sources */,
 				7AA860E21EC089E400B8B007 /* NewPostSelectPopUp.swift in Sources */,
 				7AF00BEC1F165EED00670470 /* BlogPostViewController.swift in Sources */,
 				7AE054841ECC438500C9A638 /* Alert1ViewController.swift in Sources */,
+				7AE5CCA01F4437FA009A7C22 /* FlightPopUpViewController.swift in Sources */,
 				7A64BD4C1EE7E0B30008461B /* Base-PrefsViewController.swift in Sources */,
 				7AF00BE81F161BF300670470 /* MyBlogsTableViewCell.swift in Sources */,
+				7A5D8CDC1F432A12009479ED /* TripsTableCell.swift in Sources */,
+				7AE5CC9E1F44288C009A7C22 /* AddTripViewController.swift in Sources */,
 				7A2BD0251F03F8A600F8CC3A /* ThreeImageTableViewCell.swift in Sources */,
 				7A49C4E51F13C39500A9E911 /* MyMenuVC.swift in Sources */,
 				7A4B05AA1ED5B95B00C1EA14 /* RetourStandards.swift in Sources */,
@@ -933,6 +993,8 @@
 					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/ImagePicker",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/EZSwiftExtensions",
 					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/WSTagsField",
+					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/DGElasticPullToRefresh",
+					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/DateTimePicker",
 				);
 				INFOPLIST_FILE = retour/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -969,6 +1031,8 @@
 					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/ImagePicker",
 					"$(PROJECT_DIR)/build/Debug-iphoneos/EZSwiftExtensions",
 					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/WSTagsField",
+					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/DGElasticPullToRefresh",
+					"$(PROJECT_DIR)/DerivedData/retour/Build/Products/Debug-iphonesimulator/DateTimePicker",
 				);
 				INFOPLIST_FILE = retour/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

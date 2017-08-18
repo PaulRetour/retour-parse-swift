@@ -228,7 +228,10 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                         print("image number saved = \(imageNumberSaved)")
                         if imageNumberSaved == self.imagesArray.count {
                             print("about to save.... object = \(self.objectToSave)")
-                            self.objectToSave.saveInBackground(block: { (done, err) in
+                            
+                            self.objectToSave.pinInBackground(block: { (done, error) in
+                            print("pinning")
+                          //  self.objectToSave.saveInBackground(block: { (done, err) in
                                 print("finally saved all images")
                                 self.savingPopUp.dismiss(animated: true, completion: {
                                     self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
@@ -254,14 +257,18 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                 })
             }
             
-        } else { print("no images")
+        } else {
+            // This does the saving and dismissing if no images present...
+            // need to add in the place saving part too
+            print("no images")
             
 
+            //objectToSave.saveEventually()
+            self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: { 
+                print("dismissing")
+            })
             objectToSave.pinInBackground(block: { (success, error) in
-                
-            //objectToSave.saveInBackground { (success, error) in
-                // objectToSave.saveEventually { (success, error) in
-                
+                print("pinning")
                 if (success) {
                     print("object saved")
                     self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: {
@@ -276,10 +283,7 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
                     print(error)
                 }
             })
-            
         }
-        
-        
     }
     
     func saveData() {
@@ -391,6 +395,19 @@ class FullPostController: UIViewController, UITextViewDelegate, UITextFieldDeleg
         return outputData
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return true
+    }
+    
+    func yourTextView(textView: UITextView!, shouldChangeTextInRange: NSRange, replacementText: NSString!) -> Bool {
+        if (replacementText == "\n")  {
+            textView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
 }
 
 extension UIViewController {
@@ -402,5 +419,7 @@ extension UIViewController {
     func dismissKeyboard() {
         view.endEditing(true)
     }
+    
+    
 }
 

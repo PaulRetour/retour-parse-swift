@@ -69,22 +69,24 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
         }
         
         super.viewDidLoad()
-        self.view.addSubview(mainNav)
+        
         resultsViewController = GMSAutocompleteResultsViewController()
         resultsViewController?.delegate = self
       //  resultsViewController?.view.frame = (CGRect.(x: 0, y: 30, width: UIScreen.main.bounds.width, height: 400)\
         resultsViewController?.view.frame = CGRect(x: 0, y: 30, width: UIScreen.main.bounds.width, height: 400)
+        self.view.addSubview(mainNav)
 
         searchController = UISearchController(searchResultsController: resultsViewController)
         searchController?.searchResultsUpdater = resultsViewController
+        searchController?.definesPresentationContext = false
         searchController?.searchBar.showsCancelButton = true
         searchController?.searchBar.delegate = self
+        
         searchController?.dimsBackgroundDuringPresentation = false
         searchController?.hidesNavigationBarDuringPresentation = false
         searchController?.searchBar.frame = CGRect(x: 0, y: UIApplication.shared.statusBarFrame.height, width: UIScreen.main.bounds.width, height: 44)
         mainNav.backgroundColor = retourGreen
         mainNav.addSubview((searchController?.searchBar)!)
-        
         
         locManager.delegate = appD
         newPostMap.delegate = self
@@ -292,6 +294,7 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
 
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         print("text")
+        self.view.bringSubview(toFront: (self.searchController?.view!)!)
 
     }
     
@@ -322,12 +325,14 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     func didUpdateAutocompletePredictions(_ viewController: GMSAutocompleteViewController) {
         print("updating")
         UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        self.view.bringSubview(toFront: (self.searchController?.view!)!)
     }
     
     func resultsController(_ resultsController: GMSAutocompleteResultsViewController,
                            didAutocompleteWith place: GMSPlace) {
         searchController?.isActive = true
         print("results1")
+        self.view.bringSubview(toFront: (self.searchController?.view!)!)
         // Do something with the selected place.
         print("Place name: \(place.name)")
         print("Place address: \(place.formattedAddress)")
@@ -338,7 +343,9 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
             self.placesClient.lookUpPlaceID(place.placeID, callback: { (place, error) in
                 if error == nil {
                 self.addCurrentLocationMarker(currentLoc: (place?.coordinate)!, place: (place?.placeID)!)
-                
+                self.presentPopUpView(placeID: place!.placeID)
+                let downwards = GMSCameraUpdate.scrollBy(x: 0, y: 100)
+                self.newPostMap.moveCamera(downwards)
                 }
                 
             })

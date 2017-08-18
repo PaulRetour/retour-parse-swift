@@ -17,7 +17,19 @@ class PlaceViewPopUpController: UIViewController, UICollectionViewDelegate , UIC
     
     var RStandard = standards()
     
-    let blogPresentr = Presentr(presentationType: .fullScreen) 
+    let blogPresentr = Presentr(presentationType: .fullScreen)
+    
+    let customBlogPresentr: Presentr = {
+        let width = ModalSize.full
+        let height = ModalSize.custom(size: 50)
+        let center = ModalCenterPosition.customOrigin(origin: CGPoint(x: 0, y: 0))
+     
+        let customType = PresentationType.custom(width: width, height: height, center: center)
+        
+        let customPresenter = Presentr(presentationType: customType)
+       
+        return customPresenter
+    }()
     
     @IBOutlet var collectionView: UICollectionView!
     
@@ -26,7 +38,7 @@ class PlaceViewPopUpController: UIViewController, UICollectionViewDelegate , UIC
         print(incomingData)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.alpha = 0.6
+        //collectionView.alpha = 0.6
         
         self.collectionView!.register(UINib(nibName: "PopUpSearchResultsCell", bundle: nil), forCellWithReuseIdentifier: "PopUpSearchResultsCell")
        // collectionView.reloadData()
@@ -52,11 +64,20 @@ class PlaceViewPopUpController: UIViewController, UICollectionViewDelegate , UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PopUpSearchResultsCell", for: indexPath) as! PopUpSearchResultsCell
         let title = incomingData[indexPath.row].value(forKey: "title") as! String
         var userDetails = incomingData[indexPath.row].object(forKey: "userPoint") as! PFObject
-        cell.layer.cornerRadius = 5
-        collectionView.backgroundColor = RStandard.retourGreen
+        //cell.layer.cornerRadius =
+       // collectionView.bounds.height = self.view.bounds.height
+       // collectionView.backgroundColor = RStandard.retourGreen
+        collectionView.backgroundColor = UIColor.clear
         cell.backgroundColor = UIColor.white
+        cell.layer.borderColor = UIColor.lightText.cgColor
+        
+        cell.userImage.layer.cornerRadius = (cell.userImage.bounds.height / 2)
+        cell.userImage.layer.masksToBounds = true
+        
+        cell.layer.borderWidth = 1
         cell.titleLabel.text = title
         cell.testLable.text = userDetails.value(forKey: "username2") as! String
+        cell.locationLabel.text = incomingData[indexPath.row].value(forKey: "GMSPlaceQuickName") as! String
         cell.mainBodyLabel.text = incomingData[indexPath.row].value(forKey: "body") as! String
 
         // check for userimage, and download it, otherwise put stock one //

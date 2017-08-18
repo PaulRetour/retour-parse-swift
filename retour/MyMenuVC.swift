@@ -26,6 +26,18 @@ class MyMenuVC: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func offlineButton(_ sender: Any) {
+        print("offline button")
+        self.delegate?.setChosenScreen(id: 3)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func tripsButton(_ sender: Any) {
+        print("trips button")
+        self.delegate?.setChosenScreen(id: 4)
+        self.dismiss(animated: true, completion: nil)
+    }
+    
 }
 
 protocol MyMenuVCDelegate: class {

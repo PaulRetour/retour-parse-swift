@@ -19,4 +19,7 @@ class PopUpSearchResultsCell: UICollectionViewCell {
     
     @IBOutlet var mainBodyLabel: UILabel!
     
+    
+    @IBOutlet var locationLabel: UILabel!
+    
 }

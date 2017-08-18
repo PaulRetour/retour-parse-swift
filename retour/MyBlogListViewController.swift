@@ -19,25 +19,34 @@ class MyBlogListViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet var myBlogsTableView: UITableView!
     
-    let myUserID = PFUser.current()?.objectId
+    @IBOutlet var noBlogsLabel: UILabel!
+    
+    let myUserID = PFUser.current()
     
     private let refreshTable = UIRefreshControl()
     
     func getMyBlogs() {
-        print("getting blogs")
+        print("getting my blogs")
        let query = PFQuery(className: "blogs")
 
-       // query.whereKey("userPoint", equalTo: myUserID)
+        query.whereKey("userPoint", equalTo: PFUser.current()!)
         
         query.findObjectsInBackground { (object, error) in
 
             print("completed query")
             if error == nil {
+                if object!.count > 0 {
+                    self.noBlogsLabel.isHidden = true
                 print("here are the objects \(object?.count)")
                 print(object)
                 self.myBlogsResults = object!
                 self.myBlogsTableView.reloadData()
-            } else { print(error) }
+                } else {
+                    print("no my blogs")
+                    self.noBlogsLabel.isHidden = false }
+            } else {
+                print("my blogs error")
+                print(error) }
         }
     }
     
@@ -46,12 +55,13 @@ class MyBlogListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     override func viewDidLoad() {
-
+        self.noBlogsLabel.isHidden = true
         let nib = UINib(nibName: "MyBlogsTableViewCell", bundle: nil)
         myBlogsTableView.register(nib, forCellReuseIdentifier: "MyBlogsTableViewCell")
         myBlogsTableView.refreshControl = refreshTable
-        myBlogsTableView.rowHeight = 300
+      //  myBlogsTableView.rowHeight = 300
         myBlogsTableView.estimatedRowHeight = 500
+        myBlogsTableView.rowHeight = UITableViewAutomaticDimension
         
         super.viewDidLoad()
         myBlogsTableView.delegate = self
@@ -65,7 +75,7 @@ class MyBlogListViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("count = \(myBlogsResults.count)")
+
         return myBlogsResults.count
     }
     
@@ -76,6 +86,8 @@ class MyBlogListViewController: UIViewController, UITableViewDelegate, UITableVi
         print(cellData)
         cell.titleField.text = cellData.value(forKey: "title") as! String
         cell.bodyField.text = cellData.value(forKey: "body") as! String
+        cell.locationFiel.text = cellData.value(forKey: "GMSPlaceQuickName") as! String
+        cell.tagsField.text = cellData.value(forKey: "tags") as! String
         print("returning cell")
         return cell
     }

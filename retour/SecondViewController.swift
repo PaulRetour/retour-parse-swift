@@ -20,6 +20,8 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
     
     let GoogleSearch = GoogleSearches()
     
+    var filterID = 0
+    
     @IBOutlet var navBar: UINavigationBar!
     
     var finalBounds = GMSCoordinateBounds()
@@ -53,6 +55,8 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
         if appD.retourLocationManager.location != nil {
         myGeoPointLocation.latitude = (appD.retourLocationManager.location?.coordinate.latitude)!
         myGeoPointLocation.longitude = (appD.retourLocationManager.location?.coordinate.longitude)!
+            
+        mapCameraToMyLocation(location: (appD.retourLocationManager.location?.coordinate)!)
         }
     }
     
@@ -88,6 +92,7 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
 
     // Use viewwillappear to reload data //
     override func viewWillAppear(_ animated: Bool) {
+        mapView.isMyLocationEnabled = true
         print("view appear")
        // getUsBlogs2()
        // getBlogsUsingPrefs()
@@ -105,8 +110,14 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
     var location2d = CLLocationCoordinate2D()
 
     var searchText = String()
+    var toFilter = false
     
     let presenter = Presentr(presentationType: .bottomHalf)
+    
+    
+  //  let customerLowerPresenter = Presentr(
+    let lowerCustomType = PresentationType.custom(width: ModalSize.full, height: ModalSize.custom(size: 200), center: ModalCenterPosition.custom(centerPoint: CGPoint(x: (UIScreen.main.bounds.width / 2), y: (UIScreen.main.bounds.height - 200))))
+    
     var prefsPresentr = Presentr(presentationType: .fullScreen)
     
     var prefsVC = UIViewController()
@@ -140,6 +151,7 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
         defaults.removeObject(forKey: "searchText")
         navBar.backgroundColor = UIColor.white
 
+
         
         do {
             // Set the map style by passing the URL of the local file.
@@ -156,9 +168,17 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
         
        // prefsPresentr.presentationType = .fullScreen
         prefsPresentr.transitionType = .coverHorizontalFromRight
-
+//        prefsPresentr.presentationType = .custom(width: ModalSize.full, height: ModalSize.full, center: ModalCenterPosition.custom(centerPoint: CGPoint(x: 200, y: 0)))
+//        prefsPresentr.backgroundColor = UIColor.white
+//        prefsPresentr.backgroundOpacity = 0.5
+        
         prefsVC = (self.storyboard?.instantiateViewController(withIdentifier: "PrefsViewController"))!
-        presenter.backgroundOpacity = 0.8
+        presenter.backgroundOpacity = 0.5
+        presenter.backgroundColor = UIColor.white
+        
+        presenter.presentationType = .custom(width: ModalSize.full, height: ModalSize.custom(size: 200), center: ModalCenterPosition.custom(centerPoint: CGPoint(x: (UIScreen.main.bounds.width/2), y: (UIScreen.main.bounds.height - 100 ))))
+       // presenter.blurBackground = true
+        
         
         mapView.backgroundColor = UIColor.white
         
@@ -224,7 +244,6 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
         }
         
         var autoOnQuery = PFQuery(className: "blogs")
-        autoOnQuery.includeKey("userPoint")
         var userQuery = PFUser.query()
         
         // Birthdate Range Finder
@@ -282,23 +301,27 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
         
         // connect the queries
         autoOnQuery.whereKey("userPoint", matchesQuery: userQuery!)
+        
         // Complete the Query
         autoOnQuery.findObjectsInBackground { (objects, error) in
             if error == nil {
                 print("objectcount \(objects?.count)")
                 print("no error in retrieving autoOnQuery - \(objects)")
                 
-//                for i in objects! {
-//                    if i.value(forKey: "title") as! String == "test" {
-//                        var new = [PFObject]()
-//                        new.append(i)
-//                    }
-//                }
-                
-                
-                self.results = objects!
+                // filter if string exists
+              //  let filtered: [PFObject] = objects!.filter{ $0.allKeys.contains(self.searchText) }
+                if self.toFilter == true {
+                print("search text = \(self.searchText)")
+                let filtered: [PFObject] = (objects?.filter { ($0.value(forKey: "title") as! String).localizedCaseInsensitiveContains(self.searchText) || ($0.value(forKey: "body") as! String).localizedCaseInsensitiveContains(self.searchText) || ($0.value(forKey: "tags") as! String).localizedCaseInsensitiveContains(self.searchText) })!
+                print("filtered array = \(filtered)")
+                self.results = filtered
+                self.filterID = 1
+                }
+                if self.filterID == 0 {
+                    self.results = objects! }
                 self.removeMarkersFromMap() // Clear current markers
                 self.addMarkersToMap()
+                self.filterID = 0
                 
             }
         }
@@ -387,10 +410,28 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
             if error == nil {
                 print("objectcount \(objects?.count)")
                 print("no error in retrieving autoOnQuery - \(objects)")
-                self.results = objects!
+
+                if self.toFilter == true {
+                    print("search text = \(self.searchText)")
+                    let filtered: [PFObject] = (objects?.filter { ($0.value(forKey: "title") as! String).localizedCaseInsensitiveContains(self.searchText) || ($0.value(forKey: "body") as! String).localizedCaseInsensitiveContains(self.searchText) || ($0.value(forKey: "tags") as! String).localizedCaseInsensitiveContains(self.searchText) })!
+                    print("filtered array = \(filtered)")
+                    self.results = filtered
+                    self.filterID = 1
+                }
+                if self.filterID == 0 {
+                    self.results = objects! }
                 self.removeMarkersFromMap() // Clear current markers
                 self.addMarkersToMap()
+                self.filterID = 0
+                
             }
+//            if error == nil {
+//                print("objectcount \(objects?.count)")
+//                print("no error in retrieving autoOnQuery - \(objects)")
+//                self.results = objects!
+//                self.removeMarkersFromMap() // Clear current markers
+//                self.addMarkersToMap()
+//            }
         }
     }
     
@@ -632,6 +673,9 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
            // let types = i.value(forKey: "types_array")
            // print("types = \(types)")
             var marker = GMSMarker(position: loc)
+
+            marker.appearAnimation = GMSMarkerAnimation.pop
+            //
             marker.tracksViewChanges = true
             marker.tracksInfoWindowChanges = true
             print(marker.position)
@@ -760,14 +804,18 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
     
 
     func mapView(_ mapView: GMSMapView, didTapInfoWindowOf marker: GMSMarker) {
+        
+    //    let filtered: [PFObject] = (objects?.filter { ($0.value(forKey: "title") as! String).localizedCaseInsensitiveContains(self.searchText) || ($0.value(forKey: "body") as! String).localizedCaseInsensitiveContains(self.searchText) || ($0.value(forKey: "tags") as! String).localizedCaseInsensitiveContains(self.searchText) })!
     
         print("results at this point - \(markerObjects)")
+        print("marker userdata = \(self.lookupID)")
         // create custom pop up window//
         var popup = PlaceViewPopUpController()
         popup = (self.storyboard?.instantiateViewController(withIdentifier: "placeViewPopUp"))! as! PlaceViewPopUpController
-        popup.incomingData = results
-        let infoAddition = Presentr(presentationType: .bottomHalf)
-        customPresentViewController(infoAddition, viewController: popup, animated: true) { 
+        popup.incomingData = results.filter{ ($0.value(forKey: "GMSPlaceID") as! String).localizedCaseInsensitiveContains(self.lookupID as! String)}
+       // let infoAddition = Presentr(presentationType: .bottomHalf)
+        let infoAddition = Presentr(presentationType: lowerCustomType)
+        customPresentViewController(presenter, viewController: popup, animated: true) {
           //  print("completed - load last few entries into here or extra button to take you to table view")
         }
     }
@@ -816,7 +864,8 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
     }
     
     func mapCameraToMyLocation(location: CLLocationCoordinate2D) {
-        
+        let camera = GMSCameraPosition(target: location, zoom: 10, bearing: 0, viewingAngle: 1)
+        mapView.animate(to: camera)
     }
 
 }

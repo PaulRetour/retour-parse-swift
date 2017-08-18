@@ -10,8 +10,13 @@ import Foundation
 import UIKit
 import Parse
 import Presentr
+import WSTagsField
 
-class BlogPostViewController: UIViewController {
+class BlogPostViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    var numberOfImages: Int!
+    
+    var imagesToDisplay = [UIImage]()
     
     let retourStandards = standards()
    
@@ -32,6 +37,11 @@ class BlogPostViewController: UIViewController {
     @IBOutlet var blogBody: UILabel!
     
     @IBOutlet var blogTags: UILabel!
+    
+    var alreadyInFaves: Bool?
+   
+    @IBOutlet var imageCollectionView: UICollectionView!
+    
     @IBAction func cancelButton(_ sender: Any) {
         self.dismiss(animated: true) { 
             
@@ -47,28 +57,54 @@ class BlogPostViewController: UIViewController {
     @IBOutlet var whiteBackgroundView: UIView!
     
     @IBAction func favouriteButton(_ sender: Any) {
+        if alreadyInFaves == false {
         let blogID: String = incomingData.value(forKey: "objectId") as! String
-        print("object Id = \(blogID)")
-        var saveUser = PFUser.current()
-        print("current user = \(saveUser)")
         var faves = Array<String>()
+        print("object Id = \(blogID)")
+        var saveUser = PFUser.current()!
+        print("current user = \(saveUser)")
+        if saveUser.object(forKey: "faveBlogs") != nil {
+            print("fave exists")
+        faves = saveUser.value(forKey: "faveBlogs") as! Array<String>
         faves.append(blogID)
+        } else {
+            print("faves not exist")
+            faves.insert(blogID, at: 0)
+        }
+
         print("faves = \(faves)")
-        saveUser?.setValue(faves, forKey: "faveBlogs")
-        saveUser?.saveInBackground(block: { (done, error) in
+        saveUser.setValue(faves, forKey: "faveBlogs")
+        saveUser.saveInBackground(block: { (done, error) in
             if error == nil {
                 print("done updating blog into current user")
             }
         })
         
-        
+      checkIfAlreadyFave()
+        } else {
+            print("already in favourites so remove here")
+            var currentFaves: Array<String> = PFUser.current()?.value(forKey: "faveBlogs") as! Array<String>
+            currentFaves = currentFaves.filter { !$0.contains(incomingData.objectId!) }
+            print("fave blogs now - \(currentFaves)")
+            PFUser.current()?.setValue(currentFaves, forKey: "faveBlogs")
+            PFUser.current()?.saveInBackground(block: { (done, error) in
+                if error == nil {
+                    print("updated removing blogs from faves")
+                }
+            })
+        }
     }
     override func viewDidLoad() {
+        
         heartTabBarButton.tintColor = retourStandards.retourGreen
+        
+        checkIfAlreadyFave()
+
         cancelButton.tintColor = retourStandards.retourGreen
         // backgroundView.backgroundColor = retourStandards.retourGrey
         backgroundView.backgroundColor = UIColor.lightGray
-        whiteBackgroundView.layer.cornerRadius = 10
+        backgroundView.backgroundColor?.withAlphaComponent(0.3)
+        whiteBackgroundView.layer.cornerRadius = 5
         whiteBackgroundView.layer.masksToBounds = true
         let titleImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         titleImageView.image = UIImage(named: "newticketlogo44.png")
@@ -114,7 +150,123 @@ class BlogPostViewController: UIViewController {
             }
         }
         
+        findAndAddImages()
+    }
+    
+    func checkIfAlreadyFave(){
+        
+        if PFUser.current()?.value(forKey: "faveBlogs") != nil {
+        let userFaves = PFUser.current()?.value(forKey: "faveBlogs") as! Array<String>
+            if userFaves.contains(incomingData.objectId!) {
+                print("already exists in array so changing colour")
+                self.heartTabBarButton.tintColor = UIColor.red
+                self.alreadyInFaves = true
+            } else {
+                print("doesnt exist in faves array")
+                self.heartTabBarButton.tintColor = retourStandards.retourGrey
+                self.alreadyInFaves = false
+            }
+        }
+    }
+    
+    func findAndAddImages() {
+        
+        print("find and add images")
+
+        var image1: UIImage?
+        var image2: UIImage?
+        var image3: UIImage?
+        
+        // Find the number of images... //
+        if incomingData.object(forKey: "image2file") != nil {
+            numberOfImages = 3
+        } else if incomingData.object(forKey: "image1file") != nil {
+            numberOfImages = 2
+        } else if incomingData.object(forKey: "image0file") != nil {
+            numberOfImages = 1
+        } else {
+            numberOfImages = 0
+        }
+        
+        print("number of images - \(numberOfImages)")
+        
+        switch numberOfImages {
+        case 3:
+            print("3 images")
+            let image3File = incomingData.value(forKey: "image2file") as! PFFile
+            let image2File = incomingData.value(forKey: "image1file") as! PFFile
+            let image1File = incomingData.value(forKey: "image0file") as! PFFile
+            image3File.getDataInBackground(block: { (data, error) in
+                if error == nil {
+                    image3 = UIImage(data: data!)
+                    self.imagesToDisplay.append(image3!)
+                }
+            })
+            image2File.getDataInBackground(block: { (data, error) in
+                if error == nil {
+                    image2 = UIImage(data: data!)
+                    self.imagesToDisplay.append(image2!)
+                }
+            })
+            image1File.getDataInBackground(block: { (data, error) in
+                if error == nil {
+                    image1 = UIImage(data: data!)
+                    self.imagesToDisplay.append(image1!)
+                    self.imageCollectionView.reloadData()
+                }
+            })
+            
+            
+        case 2:
+            print("2 images")
+            let image2File = incomingData.value(forKey: "image1file") as! PFFile
+            let image1File = incomingData.value(forKey: "image0file") as! PFFile
+            image2File.getDataInBackground(block: { (data, error) in
+                if error == nil {
+                    image2 = UIImage(data: data!)
+                    self.imagesToDisplay.append(image2!)
+                    self.imageCollectionView.reloadData()
+                }
+            })
+            image1File.getDataInBackground(block: { (data, error) in
+                if error == nil {
+                    image1 = UIImage(data: data!)
+                    self.imagesToDisplay.append(image1!)
+                    self.imageCollectionView.reloadData()
+                }
+            })
+            
+        case 1:
+            print("1 image")
+            let image1File = incomingData.value(forKey: "image0file") as! PFFile
+            image1File.getDataInBackground(block: { (data, error) in
+                if error == nil {
+                    image1 = UIImage(data: data!)
+                    self.imagesToDisplay.append(image1!)
+                    self.imageCollectionView.reloadData()
+                    
+                }
+            })
+
+        default:
+            print("no images found or error")
+        }
         
     }
     
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath)
+        let imageCell = cell.viewWithTag(1) as! UIImageView
+        imageCell.image = imagesToDisplay[indexPath.row]
+        return cell
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print("number of images = \(numberOfImages)")
+        return numberOfImages
+    }
 }

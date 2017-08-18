@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="TripsTableCell" rowHeight="148" id="lyJ-yv-kGd" customClass="TripsTableCell" customModule="retour" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="148"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lyJ-yv-kGd" id="KjO-Gu-1pY">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="147.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UXV-Si-K75" userLabel="tripTitle">
+                        <rect key="frame" x="8" y="8" width="155" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="155" id="iSf-Hx-L8N"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OdO-Xy-RCY" userLabel="tripDetail">
+                        <rect key="frame" x="165" y="7" width="202" height="32"/>
+                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="12"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lv6-1E-tT2">
+                        <rect key="frame" x="8" y="47" width="359" height="92"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="92" id="2PY-Ol-R6r"/>
+                            <constraint firstAttribute="width" constant="359" id="a9C-tH-o5G"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nT6-nm-1lq" userLabel="blogCount">
+                        <rect key="frame" x="8" y="118" width="202" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="202" id="9Gd-Kq-7bv"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="UXV-Si-K75" firstAttribute="leading" secondItem="Lv6-1E-tT2" secondAttribute="leading" id="0NU-z4-AW6"/>
+                    <constraint firstItem="OdO-Xy-RCY" firstAttribute="trailing" secondItem="Lv6-1E-tT2" secondAttribute="trailing" id="IWh-Jh-AdW"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="nT6-nm-1lq" secondAttribute="bottom" constant="0.5" id="Kux-hM-hWO"/>
+                    <constraint firstItem="Lv6-1E-tT2" firstAttribute="bottom" secondItem="nT6-nm-1lq" secondAttribute="bottom" id="LYe-6P-Shp"/>
+                    <constraint firstItem="OdO-Xy-RCY" firstAttribute="top" secondItem="KjO-Gu-1pY" secondAttribute="topMargin" constant="-1" id="Le4-mh-cTh"/>
+                    <constraint firstItem="Lv6-1E-tT2" firstAttribute="leading" secondItem="nT6-nm-1lq" secondAttribute="leading" id="RoS-tk-CRR"/>
+                    <constraint firstItem="UXV-Si-K75" firstAttribute="baseline" secondItem="OdO-Xy-RCY" secondAttribute="baseline" id="VKx-TE-MV6"/>
+                    <constraint firstItem="OdO-Xy-RCY" firstAttribute="leading" secondItem="UXV-Si-K75" secondAttribute="trailing" constant="2" id="YFG-Lv-ogn"/>
+                    <constraint firstItem="Lv6-1E-tT2" firstAttribute="top" secondItem="UXV-Si-K75" secondAttribute="bottom" constant="8" id="dWQ-PA-UfX"/>
+                    <constraint firstItem="UXV-Si-K75" firstAttribute="top" secondItem="KjO-Gu-1pY" secondAttribute="topMargin" id="l3g-c6-NzJ"/>
+                    <constraint firstItem="OdO-Xy-RCY" firstAttribute="trailing" secondItem="KjO-Gu-1pY" secondAttribute="trailingMargin" id="mkt-8G-BJY"/>
+                    <constraint firstItem="UXV-Si-K75" firstAttribute="leading" secondItem="KjO-Gu-1pY" secondAttribute="leadingMargin" id="y83-xj-d8T"/>
+                    <constraint firstItem="nT6-nm-1lq" firstAttribute="top" secondItem="UXV-Si-K75" secondAttribute="bottom" constant="79" id="yF0-8w-UHe"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="blogCount" destination="nT6-nm-1lq" id="i9X-4y-RmR"/>
+                <outlet property="tripDetail" destination="OdO-Xy-RCY" id="Kan-1r-tgC"/>
+                <outlet property="tripImage" destination="Lv6-1E-tT2" id="hBD-eB-cR0"/>
+                <outlet property="tripTitle" destination="UXV-Si-K75" id="huY-z4-SG7"/>
+            </connections>
+            <point key="canvasLocation" x="47.5" y="65"/>
+        </tableViewCell>
+    </objects>
+</document>

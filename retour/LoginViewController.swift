@@ -37,6 +37,8 @@ class LoginViewController: UIViewController {
 
                 self.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: nil)
                 
+            } else {
+                print("do something here - cannot login")
             }
         }
         
