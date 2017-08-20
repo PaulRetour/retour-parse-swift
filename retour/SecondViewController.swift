@@ -20,6 +20,10 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
     
     let GoogleSearch = GoogleSearches()
     
+    let cg1 = CGSize(width: 1, height: 1)
+    
+
+    
     var filterID = 0
     
     @IBOutlet var navBar: UINavigationBar!
@@ -176,6 +180,9 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
         presenter.backgroundOpacity = 0.5
         presenter.backgroundColor = UIColor.white
         
+        let shad = PresentrShadow(shadowColor: UIColor.black, shadowOpacity: 0.4, shadowOffset: cg1 ,shadowRadius: 1)
+        presenter.dropShadow = shad
+        
         presenter.presentationType = .custom(width: ModalSize.full, height: ModalSize.custom(size: 200), center: ModalCenterPosition.custom(centerPoint: CGPoint(x: (UIScreen.main.bounds.width/2), y: (UIScreen.main.bounds.height - 100 ))))
        // presenter.blurBackground = true
         
@@ -270,6 +277,7 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
         
         // Get Search Max Distance from Prefs
         let searchDistance = searchUserDefaults.double(forKey: "searchDistance")
+        print("autoOnDistance = \(searchDistance)")
         
         // Get Timeframe for Auto Search
         let timeFrame = searchUserDefaults.value(forKey: "timeframe") as! String
@@ -346,6 +354,7 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
         
         // Get Search Max Distance from Prefs
         let searchDistance = searchUserDefaults.double(forKey: "searchDistance")
+        print("autoOffDistance = \(searchDistance)")
         
         // Get Upper and Lower User Date for Query
         let blogUserDate = DateFormatter()

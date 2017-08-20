@@ -19,6 +19,10 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="334.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aaK-YP-8SZ">
+                        <rect key="frame" x="0.0" y="8" width="375" height="319"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aRx-o6-90B">
                         <rect key="frame" x="8" y="283" width="39" height="39"/>
                         <constraints>
@@ -85,6 +89,7 @@
                         </constraints>
                     </imageView>
                 </subviews>
+                <color key="backgroundColor" red="0.67565854059999997" green="0.67565854059999997" blue="0.67565854059999997" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstItem="85x-oH-dmd" firstAttribute="leading" secondItem="HkI-za-w84" secondAttribute="leadingMargin" id="2SE-e4-rJx"/>
                     <constraint firstItem="xol-hp-9DQ" firstAttribute="trailing" secondItem="HIn-sN-A1T" secondAttribute="trailing" id="3vd-Q9-efY"/>
@@ -101,10 +106,14 @@
                     <constraint firstItem="uUa-9f-18k" firstAttribute="leading" secondItem="aRx-o6-90B" secondAttribute="leading" constant="47" id="LvG-vK-CYo"/>
                     <constraint firstItem="xol-hp-9DQ" firstAttribute="leading" secondItem="HIn-sN-A1T" secondAttribute="leading" id="NV0-QK-0FF"/>
                     <constraint firstItem="Mll-K1-S0p" firstAttribute="leading" secondItem="uUa-9f-18k" secondAttribute="leading" id="PhP-Uu-eXo"/>
+                    <constraint firstItem="aaK-YP-8SZ" firstAttribute="leading" secondItem="HkI-za-w84" secondAttribute="leading" id="R0p-Zc-r2W"/>
+                    <constraint firstItem="aaK-YP-8SZ" firstAttribute="top" secondItem="HkI-za-w84" secondAttribute="top" constant="8" id="Sl8-g2-saG"/>
                     <constraint firstItem="Ace-7g-ljc" firstAttribute="top" secondItem="RVO-8d-i34" secondAttribute="top" id="TbN-Ep-Bai"/>
                     <constraint firstItem="85x-oH-dmd" firstAttribute="trailing" secondItem="xol-hp-9DQ" secondAttribute="trailing" id="ULo-2q-9gX"/>
                     <constraint firstItem="UdH-9k-uuL" firstAttribute="leading" secondItem="HkI-za-w84" secondAttribute="leadingMargin" constant="23" id="Ukb-xI-U6F"/>
                     <constraint firstItem="aRx-o6-90B" firstAttribute="top" secondItem="uUa-9f-18k" secondAttribute="bottom" constant="11" id="VLr-nf-9tg"/>
+                    <constraint firstAttribute="trailing" secondItem="aaK-YP-8SZ" secondAttribute="trailing" id="Xi7-Ls-2IZ"/>
+                    <constraint firstAttribute="bottom" secondItem="aaK-YP-8SZ" secondAttribute="bottom" constant="7.5" id="ZFR-JF-vYl"/>
                     <constraint firstItem="85x-oH-dmd" firstAttribute="top" secondItem="HkI-za-w84" secondAttribute="topMargin" constant="12" id="bTK-yU-axN"/>
                     <constraint firstItem="Ace-7g-ljc" firstAttribute="bottom" secondItem="RVO-8d-i34" secondAttribute="bottom" id="hLa-Rd-Hwh"/>
                     <constraint firstItem="UdH-9k-uuL" firstAttribute="top" secondItem="uUa-9f-18k" secondAttribute="top" constant="-1" id="i6H-XT-thQ"/>

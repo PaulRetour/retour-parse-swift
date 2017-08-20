@@ -266,13 +266,14 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
         self.loadingIndicator.isHidden = false
         self.loadingIndicator.startAnimating()
         print("Main Home - Updating Location")
-        
+        if reach.isReachable {
         let loadingAppD = UIApplication.shared.delegate as! AppDelegate
         if let loccoord = loadingAppD.retourLocationManager.location {
             self.loadingIndicator.isHidden = true
             self.locationCoord = loccoord
             returnLocationString()
         }
+        } else { locationLabel.text = "Offline" }
     }
 
     // test function to get all posts not by me!

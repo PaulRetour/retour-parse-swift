@@ -10,8 +10,11 @@ import Foundation
 import UIKit
 import Parse
 import Presentr
+import ReachabilitySwift
 
 class FavouritesViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
+    
+    let reach = Reachability()
     
     var favouriteResults = [PFObject]()
     let me = PFUser.current()
@@ -62,7 +65,13 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         favouritesTableView.dataSource = self
         favouritesTableView.rowHeight = UITableViewAutomaticDimension
         favouritesTableView.estimatedRowHeight = 400
+        
+        if reach!.isReachable {
         getAllMyFavourites()
+        } else {
+            noFaveLabel.text = "Offline"
+        
+        }
         favouritesTableView.register(cellImage1Nib, forCellReuseIdentifier: "SingleImageTableViewCell")
         favouritesTableView.register(cellImage2Nib, forCellReuseIdentifier: "TwoImageTableViewCell")
         favouritesTableView.register(cellImage3Nib, forCellReuseIdentifier: "ThreeImageTableViewCell")
@@ -100,12 +109,17 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
         if cellData.object(forKey: "image2file") != nil {
             print("threeimagecellfavourite")
             var cell = tableView.dequeueReusableCell(withIdentifier: "ThreeImageTableViewCell", for: indexPath) as! ThreeImageTableViewCell
-            cell.bodyLabel.text = cellData.value(forKey: "body") as! String
-            cell.titleLabel.text = cellData.value(forKey: "title") as! String
-            cell.locationLabel.text = cellData.value(forKey: "GMSPlaceQuickName") as! String
+            if cellData.value(forKey: "body") != nil { cell.bodyLabel.text = cellData.value(forKey: "body") as! String }
+            if cellData.value(forKey: "title") != nil { cell.titleLabel.text = cellData.value(forKey: "title") as! String }
+            if cellData.value(forKey: "GMSPlaceQuickName") != nil { cell.locationLabel.text = cellData.value(forKey: "GMSPlaceQuickName") as! String }
             let cellDataUser = cellData.value(forKey: "userPoint") as! PFObject
-            cellData.fetchInBackground()
-            cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String
+            
+            cellDataUser.fetchIfNeededInBackground(block: { (object, error) in
+                if error == nil {
+                    cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String
+                }
+            })
+
             let image1 = cellData.value(forKey: "image0file") as! PFFile
             let image2 = cellData.value(forKey: "image1file") as! PFFile
             let image3 = cellData.value(forKey: "image2file") as! PFFile
@@ -118,6 +132,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
                 }
             })
             
+                
             image1.getDataInBackground(block: { (data, error) in
                 if error == nil {
                     let finalImage1: UIImage = UIImage(data: data!)!
@@ -147,15 +162,22 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.userImage.layer.cornerRadius = (cell.userImage.bounds.height / 2)
             cell.userImage.clipsToBounds = true
             let cellDataUser = cellData.value(forKey: "userPoint") as! PFObject
-            cellData.fetchInBackground()
-            cell.bodyLable.text = cellData.value(forKey: "body") as! String
-            cell.titleLabel.text = cellData.value(forKey: "title") as! String
-            cell.tagsLabel.text = cellData.value(forKey: "tags") as! String
-            cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String
-            cell.locationLabel.text = cellData.value(forKey: "GMSPlaceQuickName") as! String
+            
+            if cellData.value(forKey: "body") != nil { cell.bodyLable.text = cellData.value(forKey: "body") as! String }
+            if cellData.value(forKey: "title") != nil { cell.titleLabel.text = cellData.value(forKey: "title") as! String }
+            if cellData.value(forKey: "tags") != nil { cell.tagsLabel.text = cellData.value(forKey: "tags") as! String }
+            if cellData.value(forKey: "username2") != nil { cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String }
+            if cellData.value(forKey: "GMSplaceQuickName") != nil { cell.locationLabel.text = cellData.value(forKey: "GMSPlaceQuickName") as! String }
+            
             let image1 = cellData.value(forKey: "image0file") as! PFFile
             let image2 = cellData.value(forKey: "image1file") as! PFFile
 
+            cellDataUser.fetchIfNeededInBackground(block: { (object, error) in
+                if error == nil {
+                    cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String
+                }
+            })
+            
             let userImage = cellDataUser.value(forKey: "userImage") as! PFFile
             
             userImage.getDataInBackground(block: { (data, error) in
@@ -164,6 +186,8 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
                     cell.userImage.image = finalUserImage
                 }
             })
+                
+            
             
             image1.getDataInBackground(block: { (data, error) in
                 if error == nil {
@@ -188,7 +212,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             print("celldata")
             print(cellData)
             let cellDataUser = cellData.value(forKey: "userPoint") as! PFObject
-            cellData.fetchInBackground()
+          //  cellData.fetchInBackground()
             cell.bodyLabel.text = cellData.value(forKey: "body") as! String
             cell.titleLabel.text = cellData.value(forKey: "title") as! String
             cell.locationLabel.text = cellData.value(forKey: "GMSPlaceQuickName") as! String
@@ -197,20 +221,22 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.userImage.layer.cornerRadius = (cell.userImage.bounds.height / 2)
             cell.userImage.clipsToBounds = true
             let image1 = cellData.value(forKey: "image0file") as! PFFile
-            let userImage = cellDataUser.value(forKey: "userImage") as! PFFile
+
             image1.getDataInBackground(block: { (data, error) in
                 if error == nil {
                     let finalImage1: UIImage = UIImage(data: data!)!
                     cell.image1File.image = finalImage1
                 }
             })
-            
+            if cellDataUser.value(forKey: "userImage") != nil {
+            let userImage = cellDataUser.value(forKey: "userImage") as! PFFile
             userImage.getDataInBackground(block: { (data, error) in
                 if error == nil {
                     let finalUserImage: UIImage = UIImage(data: data!)!
                     cell.userImage.image = finalUserImage
                 }
             })
+            }
             
             return cell
         }

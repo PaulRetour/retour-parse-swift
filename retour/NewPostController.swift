@@ -145,6 +145,10 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
     // Takes the location ID retrieves again and adds text to popup view
     func presentPopUpView(placeID: String) {
       //  mainNav.isHidden = true
+        
+        let shadOffset = CGSize(width: 2, height: 2)
+        
+        let shad = PresentrShadow(shadowColor: UIColor.black, shadowOpacity: 0.8, shadowOffset: shadOffset, shadowRadius: 5)
         print("presentpopupview")
         var placeName1: String!
         var placeAddress: String!
@@ -170,6 +174,7 @@ class NewPostController: UIViewController, GMSMapViewDelegate, PresentrDelegate,
         }
         presenter.blurBackground = false
         presenter.backgroundOpacity = 0.1
+        presenter.dropShadow = shad
         
         popUpVC = self.storyboard?.instantiateViewController(withIdentifier: "NewPostSelectPopUp") as! NewPostSelectPopUp
         popUpVC.view.backgroundColor = UIColor.white
