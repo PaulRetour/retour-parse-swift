@@ -139,7 +139,6 @@
 		7AE054841ECC438500C9A638 /* Alert1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE054831ECC438500C9A638 /* Alert1ViewController.swift */; };
 		7AE5CC9E1F44288C009A7C22 /* AddTripViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5CC9D1F44288C009A7C22 /* AddTripViewController.swift */; };
 		7AE5CCA01F4437FA009A7C22 /* FlightPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE5CC9F1F4437FA009A7C22 /* FlightPopUpViewController.swift */; };
-		7AE6CFD9200F5F3F00C5CB6A /* testing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AE6CFD8200F5F3F00C5CB6A /* testing.swift */; };
 		7AF00BE81F161BF300670470 /* MyBlogsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF00BE71F161BF300670470 /* MyBlogsTableViewCell.swift */; };
 		7AF00BEA1F161C1000670470 /* MyBlogsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7AF00BE91F161C1000670470 /* MyBlogsTableViewCell.xib */; };
 		7AF00BEC1F165EED00670470 /* BlogPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AF00BEB1F165EED00670470 /* BlogPostViewController.swift */; };
@@ -308,7 +307,6 @@
 		7AE054831ECC438500C9A638 /* Alert1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert1ViewController.swift; sourceTree = "<group>"; };
 		7AE5CC9D1F44288C009A7C22 /* AddTripViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTripViewController.swift; sourceTree = "<group>"; };
 		7AE5CC9F1F4437FA009A7C22 /* FlightPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightPopUpViewController.swift; sourceTree = "<group>"; };
-		7AE6CFD8200F5F3F00C5CB6A /* testing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = testing.swift; path = "/Users/paullancashire/Google Drive/Development/retour/testing.swift"; sourceTree = "<absolute>"; };
 		7AF00BE71F161BF300670470 /* MyBlogsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyBlogsTableViewCell.swift; sourceTree = "<group>"; };
 		7AF00BE91F161C1000670470 /* MyBlogsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyBlogsTableViewCell.xib; sourceTree = "<group>"; };
 		7AF00BEB1F165EED00670470 /* BlogPostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlogPostViewController.swift; sourceTree = "<group>"; };
@@ -531,7 +529,6 @@
 		7A9EBB1C1EB872E9005DEA7E = {
 			isa = PBXGroup;
 			children = (
-				7AE6CFD8200F5F3F00C5CB6A /* testing.swift */,
 				7A06B6451EF3FD9A00DDA329 /* SavingViewController.swift */,
 				7A9CAA511EDEC4B10004C7CA /* RetourMapStyle.json */,
 				7A4B05AD1ED6DB2800C1EA14 /* ActivityIndicator.swift */,
@@ -923,7 +920,6 @@
 				7ABAC8CD1ECB4E9700A7317C /* NewPostImagesXib.swift in Sources */,
 				7A067ABD1EB8B85A00DFBE56 /* RegisterLoginViewController.swift in Sources */,
 				7A9EBB291EB872E9005DEA7E /* AppDelegate.swift in Sources */,
-				7AE6CFD9200F5F3F00C5CB6A /* testing.swift in Sources */,
 				7A7AF5B01F0155830074FBF4 /* MainHomeCollectionViewCell.swift in Sources */,
 				7AB5CFCA1EFA4E28002354AB /* PlaceViewPopUpController.swift in Sources */,
 				7A0E1B031F0E278A007538AE /* MapIconSelector.swift in Sources */,
