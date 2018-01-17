@@ -105,6 +105,7 @@
 		7A86C2B71F12BBDA00F9F565 /* MyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A86C2B61F12BBDA00F9F565 /* MyViewController.swift */; };
 		7A8C95851F3F530400DA293F /* sliderKnob48.png in Resources */ = {isa = PBXBuildFile; fileRef = 7A8C95841F3F530400DA293F /* sliderKnob48.png */; };
 		7A9CAA521EDEC4B10004C7CA /* RetourMapStyle.json in Resources */ = {isa = PBXBuildFile; fileRef = 7A9CAA511EDEC4B10004C7CA /* RetourMapStyle.json */; };
+		7A9E496E200F606900AE3B90 /* testfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9E496D200F606900AE3B90 /* testfile.swift */; };
 		7A9EBB291EB872E9005DEA7E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB281EB872E9005DEA7E /* AppDelegate.swift */; };
 		7A9EBB2B1EB872E9005DEA7E /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB2A1EB872E9005DEA7E /* FirstViewController.swift */; };
 		7A9EBB2D1EB872E9005DEA7E /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A9EBB2C1EB872E9005DEA7E /* SecondViewController.swift */; };
@@ -267,6 +268,7 @@
 		7A86C2B61F12BBDA00F9F565 /* MyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyViewController.swift; sourceTree = "<group>"; };
 		7A8C95841F3F530400DA293F /* sliderKnob48.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sliderKnob48.png; path = ../../../Design/Projects/Retour/buttons/sliderKnob48.png; sourceTree = "<group>"; };
 		7A9CAA511EDEC4B10004C7CA /* RetourMapStyle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = RetourMapStyle.json; sourceTree = "<group>"; };
+		7A9E496D200F606900AE3B90 /* testfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testfile.swift; sourceTree = "<group>"; };
 		7A9EBB251EB872E9005DEA7E /* retour.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = retour.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A9EBB281EB872E9005DEA7E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7A9EBB2A1EB872E9005DEA7E /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -529,6 +531,7 @@
 		7A9EBB1C1EB872E9005DEA7E = {
 			isa = PBXGroup;
 			children = (
+				7A9E496D200F606900AE3B90 /* testfile.swift */,
 				7A06B6451EF3FD9A00DDA329 /* SavingViewController.swift */,
 				7A9CAA511EDEC4B10004C7CA /* RetourMapStyle.json */,
 				7A4B05AD1ED6DB2800C1EA14 /* ActivityIndicator.swift */,
@@ -931,6 +934,7 @@
 				7A794B9A1F74004B003260ED /* FullScreenImageVC.swift in Sources */,
 				7AD0C1371F1A24C800B51B61 /* FacebookData.swift in Sources */,
 				7A5D8CD81F43297F009479ED /* TripsViewController.swift in Sources */,
+				7A9E496E200F606900AE3B90 /* testfile.swift in Sources */,
 				7A9EBB5B1EB87621005DEA7E /* ListViewController.swift in Sources */,
 				7AB443C71EE801B0006E3BEB /* AgeRangeCalculator.swift in Sources */,
 				7AA860E01EC06E6C00B8B007 /* NewPostController.swift in Sources */,
