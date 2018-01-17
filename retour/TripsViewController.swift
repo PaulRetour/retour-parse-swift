@@ -88,4 +88,10 @@ class TripsViewController: UIViewController, UITableViewDelegate, UITableViewDat
         print("returning cell")
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print("selecting cell")
+        let celldata = tripData[indexPath.row]
+        print(celldata)
+    }
 }

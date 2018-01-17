@@ -103,7 +103,8 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
        // var cell = UITableViewCell()
-        let cellData = favouriteResults[indexPath.row] as! PFObject
+        let cellData = favouriteResults[indexPath.row]
+        
 
         // Select a cell based on the number of images in the blog object.. count backwards! //
         if cellData.object(forKey: "image2file") != nil {
@@ -116,7 +117,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             
             cellDataUser.fetchIfNeededInBackground(block: { (object, error) in
                 if error == nil {
-                    cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String
+                    if cellDataUser.value(forKey: "username2") != nil {cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String }
                 }
             })
 
@@ -174,7 +175,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
 
             cellDataUser.fetchIfNeededInBackground(block: { (object, error) in
                 if error == nil {
-                    cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String
+                    if cellDataUser.value(forKey: "username2") != nil {cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String }
                 }
             })
             
@@ -217,7 +218,7 @@ class FavouritesViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.titleLabel.text = cellData.value(forKey: "title") as! String
             cell.locationLabel.text = cellData.value(forKey: "GMSPlaceQuickName") as! String
             cell.tagsLabel.text = cellData.value(forKey: "tags") as! String
-            cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String
+            if cellDataUser.value(forKey: "username2") != nil { cell.usernameLabel.text = cellDataUser.value(forKey: "username2") as! String }
             cell.userImage.layer.cornerRadius = (cell.userImage.bounds.height / 2)
             cell.userImage.clipsToBounds = true
             let image1 = cellData.value(forKey: "image0file") as! PFFile

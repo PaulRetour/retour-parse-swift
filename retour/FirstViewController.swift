@@ -292,6 +292,7 @@ class FirstViewController: UIViewController, UICollectionViewDelegate, UICollect
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("home view did appear")
         if PFUser.current() == nil {
             performSegue(withIdentifier: "homeToRegisterLoginSegue", sender: self)
         } else {

@@ -69,7 +69,7 @@ class Registration2ViewController: UIViewController, UIPickerViewDelegate, UIPic
     
     @IBOutlet weak var DOBTextField: JVFloatLabeledTextField!
     
-    @IBOutlet weak var label: UILabel!
+  //  @IBOutlet weak var label: UILabel!
     
     @IBOutlet var passwordField: JVFloatLabeledTextField!
     
@@ -84,7 +84,7 @@ class Registration2ViewController: UIViewController, UIPickerViewDelegate, UIPic
         statusPicker.dataSource = self
         statusPicker.delegate = self
         
-        label.textColor = standardsInfo.retourGrey
+     //   label.textColor = standardsInfo.retourGrey
         DOBTextField.inputView = datePicker
         statusTextField.inputView = statusPicker
         

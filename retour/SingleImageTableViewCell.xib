@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a8p-9L-qRa">
-                        <rect key="frame" x="0.0" y="8" width="375" height="300"/>
+                        <rect key="frame" x="0.0" y="3" width="375" height="309.5"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3PE-wk-1ap" userLabel="titleLabel">
@@ -28,7 +28,7 @@
                         <constraints>
                             <constraint firstAttribute="height" constant="16" id="s4W-KY-3WF"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -113,7 +113,7 @@
                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 <constraints>
                     <constraint firstItem="LBU-UV-UO7" firstAttribute="top" secondItem="2I7-x2-ij2" secondAttribute="bottom" constant="13" id="2S4-GX-1SD"/>
-                    <constraint firstAttribute="bottom" secondItem="a8p-9L-qRa" secondAttribute="bottom" constant="7.5" id="3p6-Ay-vx7"/>
+                    <constraint firstAttribute="bottom" secondItem="a8p-9L-qRa" secondAttribute="bottom" constant="3" id="3p6-Ay-vx7"/>
                     <constraint firstItem="z0d-8X-aYh" firstAttribute="top" secondItem="ldE-RD-KmY" secondAttribute="bottom" constant="5" id="4fs-UP-utb"/>
                     <constraint firstItem="3PE-wk-1ap" firstAttribute="leading" secondItem="d56-3y-1tO" secondAttribute="leadingMargin" id="54I-Zu-uxb"/>
                     <constraint firstItem="Obv-sU-r6a" firstAttribute="leading" secondItem="ocC-Ad-rcX" secondAttribute="trailing" constant="8" symbolic="YES" id="6MT-Og-Khj"/>
@@ -122,7 +122,7 @@
                     <constraint firstItem="2I7-x2-ij2" firstAttribute="trailing" secondItem="LBU-UV-UO7" secondAttribute="trailing" id="AkB-9W-ENc"/>
                     <constraint firstItem="LBU-UV-UO7" firstAttribute="leading" secondItem="qte-Po-X7a" secondAttribute="trailing" constant="8" symbolic="YES" id="BcT-SO-T3s"/>
                     <constraint firstItem="ldE-RD-KmY" firstAttribute="trailing" secondItem="z0d-8X-aYh" secondAttribute="trailing" id="Bgu-Tp-LlI"/>
-                    <constraint firstItem="a8p-9L-qRa" firstAttribute="top" secondItem="d56-3y-1tO" secondAttribute="top" constant="8" id="Dbp-vv-YKk"/>
+                    <constraint firstItem="a8p-9L-qRa" firstAttribute="top" secondItem="d56-3y-1tO" secondAttribute="top" constant="3" id="Dbp-vv-YKk"/>
                     <constraint firstItem="LBU-UV-UO7" firstAttribute="leading" secondItem="Obv-sU-r6a" secondAttribute="leading" id="GOj-uW-Cha"/>
                     <constraint firstItem="dSn-5r-Urh" firstAttribute="trailing" secondItem="ldE-RD-KmY" secondAttribute="trailing" id="I4F-Vx-nbs"/>
                     <constraint firstItem="Obv-sU-r6a" firstAttribute="top" secondItem="LBU-UV-UO7" secondAttribute="bottom" constant="15" id="LYf-8J-J50"/>

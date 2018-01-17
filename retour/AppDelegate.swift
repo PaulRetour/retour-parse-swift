@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, CLLocationManagerDelegate
         let configuration = ParseClientConfiguration {
             $0.applicationId = "019f49dce17c38276fjdt"
             $0.server = "https://festive-quanta-621.appspot.com/parse"
+           // $0.server = "https://www.retour.me/parse"
             $0.isLocalDatastoreEnabled = true
             
         }

@@ -16,13 +16,20 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
     
     let standardsInfo = standards()
     
+    @IBOutlet var labelBackground: UIView!
+    
     var userToSave = PFUser()
     
     @IBAction func cancelButton(_ sender: Any) {
-        self.dismiss(animated: true) { 
-            
+        self.dismiss(animated: true) {
         }
     }
+    
+    @IBAction func registerButtonPress(_ sender: Any) {
+        print("registering")
+        checkUsername()
+    }
+    
     @IBOutlet weak var spinner: InstagramActivityIndicator!
     
     var reach = Reachability()!
@@ -37,39 +44,29 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         
+        labelBackground.layer.cornerRadius = 5
+        labelBackground.alpha = 0.6
         self.hideKeyboardWhenTappedAround()
-        
-      //  alertlabel.isEnabled = false
         alertlabel.isHidden = true
-        
         emailField.delegate = self
-        
         emailField.textColor = standardsInfo.retourGreen
         emailField.placeholderColor = standardsInfo.retourGreen
         emailField.spellCheckingType = UITextSpellCheckingType.no
-        
-     //   label.textColor = standardsInfo.retourGrey
         alertlabel.textColor = standardsInfo.retourGrey
-        
         spinner.strokeColor = standardsInfo.retourGreen
         spinner.isHidden = true
         spinner.lineWidth = 3
     }
     
     func checkUsername() {
-        
+        print("checking mail address")
         self.dismissKeyboard()
-        
-        
         // if network ok //
         if reach.isReachable {
             spinner.isHidden = false
             spinner.startAnimating()
             self.alertlabel.isHidden = true
-        
-            
             if emailField.text != nil {
-                
                 // create user lookup query //
                 let userCheck = PFQuery(className: "_User")
                 userCheck.whereKey("email", equalTo: emailField.text!)
@@ -89,16 +86,9 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
                         self.alertlabel.text = "User already exists"
                         self.alertlabel.isHidden = false
                     }
-                    
                 })
             }
-        }
-            
-            
-         
-            
-        //only do the below bit if no network...
-        else {
+        } else {
             self.alertlabel.text = "Network Unavailable"
             self.alertlabel.isHidden = false
             self.spinner.stopAnimating()

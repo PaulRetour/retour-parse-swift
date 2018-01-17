@@ -75,6 +75,8 @@ class Registration3ViewController: UIViewController, ImagePickerDelegate {
         
         spinner.isHidden = false
         
+        
+        // if image exists....
         if userImage.image != nil {
         imageData = UIImageJPEGRepresentation(self.userImage.image!, 0.5)!
         let uploadData = PFFile(data: self.imageData)
@@ -91,17 +93,40 @@ class Registration3ViewController: UIViewController, ImagePickerDelegate {
 //                    }
 //                })
                 
-                self.userToSave.signUpInBackground()
+                self.userToSave.signUpInBackground(block: { (done, error) in
+                    if error == nil {
+                        
+                        if self.userToSave.value(forKey: "emailVerified") as! Bool == true {
+                            self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: { 
+                                print("verified so dismissing all back to home")
+                            })
+                        } else {
+                            self.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
+                                print("not verified so dismissing back to login screen")
+                            })
+                        }
+                        
+                        
+                        
+                    }
+                })
                 
             } else {print("error saving")
             print(error?.localizedDescription)}
         })
 
-        } else {
+        }
+        
+        // if no images exists
+            
+        else {
             print("saving without iage")
             self.userToSave.signUpInBackground(block: { (done, error) in
                 if error == nil {
                     print("done saving without images")
+                    self.presentingViewController?.presentingViewController?.presentingViewController?.presentingViewController?.dismiss(animated: true, completion: {
+                        "dismissing views"
+                    })
                 } else { print(error) }
             })
         }

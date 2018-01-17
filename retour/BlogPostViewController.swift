@@ -48,6 +48,9 @@ class BlogPostViewController: UIViewController, UICollectionViewDataSource, UICo
         }
     }
     
+    let fullScreenImagePresentr = Presentr(presentationType: .fullScreen)
+    let fullScreenImageVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FullScreenImageVC") as! FulLScreenImageVC
+    
     @IBOutlet var heartTabBarButton: UIBarButtonItem!
     
     @IBOutlet var cancelButton: UIBarButtonItem!
@@ -80,8 +83,9 @@ class BlogPostViewController: UIViewController, UICollectionViewDataSource, UICo
             }
         })
         
-      checkIfAlreadyFave()
+    //  checkIfAlreadyFave()
         } else {
+            
             print("already in favourites so remove here")
             var currentFaves: Array<String> = PFUser.current()?.value(forKey: "faveBlogs") as! Array<String>
             currentFaves = currentFaves.filter { !$0.contains(incomingData.objectId!) }
@@ -94,7 +98,14 @@ class BlogPostViewController: UIViewController, UICollectionViewDataSource, UICo
             })
         }
     }
+    
+    
     override func viewDidLoad() {
+        
+        self.automaticallyAdjustsScrollViewInsets = false
+
+        imageCollectionView.delegate = self
+        imageCollectionView.dataSource = self
         
         heartTabBarButton.tintColor = retourStandards.retourGreen
         
@@ -102,9 +113,9 @@ class BlogPostViewController: UIViewController, UICollectionViewDataSource, UICo
 
         cancelButton.tintColor = retourStandards.retourGreen
         // backgroundView.backgroundColor = retourStandards.retourGrey
-        backgroundView.backgroundColor = UIColor.lightGray
+        //backgroundView.backgroundColor = UIColor.lightGray
         backgroundView.backgroundColor?.withAlphaComponent(0.3)
-        whiteBackgroundView.layer.cornerRadius = 5
+        whiteBackgroundView.layer.cornerRadius = 2
         whiteBackgroundView.layer.masksToBounds = true
         let titleImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         titleImageView.image = UIImage(named: "newticketlogo44.png")
@@ -166,7 +177,8 @@ class BlogPostViewController: UIViewController, UICollectionViewDataSource, UICo
                 self.heartTabBarButton.tintColor = retourStandards.retourGrey
                 self.alreadyInFaves = false
             }
-        }
+        } else { print("faveblogs == nil")
+            alreadyInFaves = false }
     }
     
     func findAndAddImages() {
@@ -258,6 +270,7 @@ class BlogPostViewController: UIViewController, UICollectionViewDataSource, UICo
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "imageCell", for: indexPath)
         let imageCell = cell.viewWithTag(1) as! UIImageView
         imageCell.image = imagesToDisplay[indexPath.row]
+        print("returning cell")
         return cell
     }
     
@@ -268,5 +281,14 @@ class BlogPostViewController: UIViewController, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         print("number of images = \(numberOfImages)")
         return numberOfImages
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selecting \(imagesToDisplay[indexPath.row])")
+        let imageToShow: UIImage = imagesToDisplay[indexPath.row]
+        self.fullScreenImageVC.incomingImage = imageToShow
+        customPresentViewController(fullScreenImagePresentr, viewController: fullScreenImageVC, animated: true) { 
+            
+        }
     }
 }

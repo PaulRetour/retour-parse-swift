@@ -193,6 +193,7 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
         
         let titleImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         titleImageView.image = UIImage(named: "newticketlogo44.png")
+     //   titleImageView.image = UIImage(named: "stripeIcon48.png")
         titleImageView.contentMode = .scaleToFill
         self.navBar.topItem?.titleView = titleImageView
         
@@ -346,14 +347,14 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
             print("current location for search - \(myGeoPointLocation)")
         }
         
-        let autoOffQuery = PFQuery(className: "blogs")
-        autoOffQuery.includeKey("userPoint")
-        let userQuery = PFUser.query()
+        var autoOffQuery = PFQuery(className: "blogs")
+        var userQuery = PFUser.query()
+        //autoOffQuery.includeKey("userPoint")
         
         var ageRangeInt: Int?
         
         // Get Search Max Distance from Prefs
-        let searchDistance = searchUserDefaults.double(forKey: "searchDistance")
+        let searchDistance = defaults.double(forKey: "searchDistance")
         print("autoOffDistance = \(searchDistance)")
         
         // Get Upper and Lower User Date for Query
@@ -363,6 +364,7 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
 
         // Get Status
         let status = PFUser.current()?.object(forKey: "status") as? String
+        print("autooffquery - status from current user object = \(status)")
         
         // Get Age Range String
         let ageSearchString = defaults.value(forKey: "ageRange") as? String
@@ -399,26 +401,54 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
             print("query add - birthday less that \(lowerDate)")
             userQuery?.whereKey("birthDate", greaterThan: upperDate)
             print("query add - birthday greater that \(upperDate)")
+            
+            // Add the reference to the user query here as its going to be used...
+            autoOffQuery.whereKey("userPoint", matchesQuery: userQuery!)
+            
+            
         } else {
         print("age range int == 0 so no additional date queries")}
         
         
-        // BUILD THE QUERY //
+        // Get Timeframe for Auto Search
+        let timeFrame = searchUserDefaults.value(forKey: "timeframe") as! String
+        var searchEarliest = Date()
+        switch timeFrame {
+        case "day" :
+            searchEarliest = dayInterval
+        case "twodays" :
+            searchEarliest = twoDayInternal
+        case "week" :
+            searchEarliest = weekInterval
+        case "month" :
+            searchEarliest = monthInterval
+        default :
+            searchEarliest = dayInterval
+        }
+     autoOffQuery.whereKey("createdAt", greaterThanOrEqualTo: searchEarliest)
+
+        
+        // Status query dependent upon Status setting in prefs
+        
+        let searchStatus1 = defaults.value(forKey: "status") as! String
+        if searchStatus1 != "Any" {
+            print("adding status query")
+            userQuery?.whereKey("status", equalTo: searchStatus1)
+            autoOffQuery.whereKey("userPoint", matchesQuery: userQuery!)
+
+        } else { print("not adding status query") }
+        
         
         // add max distance to query
+        print("adding distance of within \(self.searchDistance)")
         autoOffQuery.whereKey("GMSPlaceGeo", nearGeoPoint: myGeoPointLocation, withinMiles: self.searchDistance)
-        
-        // add status query if != Any
-        if status != "Any" {
-            userQuery?.whereKey("status", equalTo: status!)
-            autoOffQuery.whereKey("userPoint", matchesQuery: userQuery!)
-        }
     
         // complete the queries
         autoOffQuery.findObjectsInBackground { (objects, error) in
+            print("start of autooffquery")
             if error == nil {
                 print("objectcount \(objects?.count)")
-                print("no error in retrieving autoOnQuery - \(objects)")
+                print("no error in retrieving autoOffQuery - \(objects)")
 
                 if self.toFilter == true {
                     print("search text = \(self.searchText)")
@@ -433,7 +463,7 @@ class SecondViewController: UIViewController, GMSMapViewDelegate, UICollectionVi
                 self.addMarkersToMap()
                 self.filterID = 0
                 
-            }
+            } else { print(error)}
 //            if error == nil {
 //                print("objectcount \(objects?.count)")
 //                print("no error in retrieving autoOnQuery - \(objects)")
